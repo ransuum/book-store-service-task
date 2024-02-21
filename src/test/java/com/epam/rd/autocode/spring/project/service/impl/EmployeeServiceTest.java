@@ -37,7 +37,7 @@ class EmployeeServiceTest {
 
     @BeforeAll
     static void testsOverrideMethods() {
-        long numberOfFindOverrideMethods = Arrays.stream(EmployeeServiceImpl.class.getDeclaredMethods())
+        Long numberOfFindOverrideMethods = Arrays.stream(EmployeeServiceImpl.class.getDeclaredMethods())
                 .filter(val -> isMethodStartsWithAndIsAssignable(val, EmployeeService.class))
                 .count();
         assertEquals(5, numberOfFindOverrideMethods,
@@ -59,7 +59,7 @@ class EmployeeServiceTest {
     @Test
     @DisplayName("Method getEmployeeById launched")
     void getEmployeeById_shouldReturnEmployeeById() {
-        long employeeId = 1L;
+        Long employeeId = 1L;
         Employee actual = createTestEmployee("Test@gmail.com", "1231241244");
 
         when(employeeRepository.findById(employeeId)).thenReturn(Optional.of(actual));
@@ -99,7 +99,7 @@ class EmployeeServiceTest {
     @Test
     @DisplayName("Method deleteEmployee launched")
     void deleteEmployeeById_shouldDeleteEmployeeById() {
-        long employeeIdToDelete = 1L;
+        Long employeeIdToDelete = 1L;
         Employee employeeToDelete = createTestEmployee("Test@gmail.com", "1231231231");
 
         when(employeeRepository.findById(employeeIdToDelete)).thenReturn(Optional.of(employeeToDelete));

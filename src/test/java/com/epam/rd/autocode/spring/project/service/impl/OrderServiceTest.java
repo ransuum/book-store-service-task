@@ -36,7 +36,7 @@ class OrderServiceTest {
 
     @BeforeAll
     static void testsOverrideMethods() {
-        long numberOfFindOverrideMethods = Arrays.stream(OrderServiceImpl.class.getDeclaredMethods())
+        Long numberOfFindOverrideMethods = Arrays.stream(OrderServiceImpl.class.getDeclaredMethods())
                 .filter(val -> isMethodStartsWithAndIsAssignable(val, OrderService.class))
                 .count();
         assertEquals(4, numberOfFindOverrideMethods,
@@ -58,7 +58,7 @@ class OrderServiceTest {
     @Test
     @DisplayName("Method getOrderById launched")
     void getOrderById_shouldReturnOrderById() {
-        long orderId = 1L;
+        Long orderId = 1L;
         Order actual = createTestOrder();
 
         when(orderRepository.findById(orderId)).thenReturn(Optional.of(actual));
@@ -77,7 +77,7 @@ class OrderServiceTest {
     @Test
     @DisplayName("Method deleteOrder launched")
     void deleteOrderById_shouldDeleteOrderById() {
-        long orderIdToDelete = 1L;
+        Long orderIdToDelete = 1L;
         Order orderToDelete = createTestOrder();
 
         when(orderRepository.findById(orderIdToDelete)).thenReturn(Optional.of(orderToDelete));

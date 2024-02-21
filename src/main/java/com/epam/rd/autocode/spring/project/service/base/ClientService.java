@@ -7,11 +7,11 @@ import java.util.List;
 public interface ClientService {
     List<ClientDTO> getAllClients();
 
-    ClientDTO getClientById(long id);
+    ClientDTO getClientById(Long id);
 
-    ClientDTO updateClientById(long id, ClientDTO client);
+    ClientDTO updateClientById(Long id, ClientDTO client);
 
-    void deleteClientById(long id);
+    void deleteClientById(Long id);
 
     ClientDTO addClient(ClientDTO client);
 }

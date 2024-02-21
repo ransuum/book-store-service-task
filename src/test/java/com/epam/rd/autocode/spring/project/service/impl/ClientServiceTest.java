@@ -37,7 +37,7 @@ class ClientServiceTest {
 
     @BeforeAll
     static void testsOverrideMethods() {
-        long numberOfFindOverrideMethods = Arrays.stream(ClientServiceImpl.class.getDeclaredMethods())
+        Long numberOfFindOverrideMethods = Arrays.stream(ClientServiceImpl.class.getDeclaredMethods())
                 .filter(val -> isMethodStartsWithAndIsAssignable(val, ClientService.class))
                 .count();
         assertEquals(5, numberOfFindOverrideMethods,
@@ -59,7 +59,7 @@ class ClientServiceTest {
     @Test
     @DisplayName("Method getClientById launched")
     void getClientById_shouldReturnClientById() {
-        long clientId = 1L;
+        Long clientId = 1L;
         Client actual = createTestClient("test@gmail.com");
 
         when(clientRepository.findById(clientId)).thenReturn(Optional.of(actual));
@@ -99,7 +99,7 @@ class ClientServiceTest {
     @Test
     @DisplayName("Method deleteClient launched")
     void deleteClientById_shouldDeleteClientById() {
-        long clientIdToDelete = 1L;
+        Long clientIdToDelete = 1L;
         Client clientToDelete = createTestClient("name@test.com");
 
         when(clientRepository.findById(clientIdToDelete)).thenReturn(Optional.of(clientToDelete));
