@@ -8,11 +8,11 @@ public interface EmployeeService {
 
     List<EmployeeDTO> getAllEmployees();
 
-    EmployeeDTO getEmployeeById(long id);
+    EmployeeDTO getEmployeeById(Long id);
 
-    EmployeeDTO updateEmployeeById(long id, EmployeeDTO employee);
+    EmployeeDTO updateEmployeeById(Long id, EmployeeDTO employee);
 
-    void deleteEmployeeById(long id);
+    void deleteEmployeeById(Long id);
 
     EmployeeDTO addEmployee(EmployeeDTO employee);
 }

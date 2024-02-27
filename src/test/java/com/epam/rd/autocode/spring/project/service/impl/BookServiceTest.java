@@ -37,7 +37,7 @@ class BookServiceTest {
 
     @BeforeAll
     static void testsOverrideMethods() {
-        long numberOfFindOverrideMethods = Arrays.stream(BookServiceImpl.class.getDeclaredMethods())
+        Long numberOfFindOverrideMethods = Arrays.stream(BookServiceImpl.class.getDeclaredMethods())
                 .filter(val -> isMethodStartsWithAndIsAssignable(val, BookService.class))
                 .count();
         assertEquals(5, numberOfFindOverrideMethods,
@@ -59,7 +59,7 @@ class BookServiceTest {
     @Test
     @DisplayName("Method getBookById launched")
     void getBookById_shouldReturnBookById() {
-        long bookId = 1L;
+        Long bookId = 1L;
         Book actual = createTestBook("Test 1");
 
         when(bookRepository.findById(bookId)).thenReturn(Optional.of(actual));
@@ -99,7 +99,7 @@ class BookServiceTest {
     @Test
     @DisplayName("Method deleteBook launched")
     void deleteBookById_shouldDeleteBookById() {
-        long bookIdToDelete = 1L;
+        Long bookIdToDelete = 1L;
         Book bookToDelete = createTestBook("Test Book");
 
         when(bookRepository.findById(bookIdToDelete)).thenReturn(Optional.of(bookToDelete));
