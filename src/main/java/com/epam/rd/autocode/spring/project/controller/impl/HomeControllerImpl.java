@@ -1,5 +1,5 @@
 package com.epam.rd.autocode.spring.project.controller.impl;
 
-public record HomeControllerImpl(){
+public class HomeControllerImpl{
     // TODO Place your code here
 }

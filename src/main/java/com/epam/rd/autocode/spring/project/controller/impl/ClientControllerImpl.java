@@ -1,5 +1,5 @@
 package com.epam.rd.autocode.spring.project.controller.impl;
 
-public record ClientControllerImpl() {
+public class ClientControllerImpl {
     // TODO Place your code here
 }

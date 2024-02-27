@@ -1,5 +1,5 @@
 package com.epam.rd.autocode.spring.project.service.impl;
 
-public record EmployeeServiceImpl(){
+public class EmployeeServiceImpl{
     // TODO Place your code here
 }
