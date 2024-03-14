@@ -21,21 +21,31 @@ Your project is organized into several packages. Here's a brief overview of each
 
 #### `controller`
 
-- **`dto`**: Contains DTO (Data Transfer Object) files.
-- **`error`**: Holds the ErrorHandler file.
+- Consists of interfaces with declared methods for all controllers.
+
 - **`impl`**: Includes implementations of declared controllers.
-- **`base`**: Consists of interfaces with declared methods for all controllers.
+
+#### `dto`
+
+- Contains DTO (Data Transfer Object) files.
 
 #### `model`
 
 - Contains all model classes.
 
+#### `exception`
+
+- Contains custom user exception files.
+
+#### `repo`
+
+- Contains repository files.
+
 #### `service`
 
-- `exception`: Contains custom user exception files.
-- `repo`: Contains repository files.
+- Includes interfaces with declared methods for all services.
+
 - `impl`: Encompasses implementations of declared services.
-- `base`: Includes interfaces with declared methods for all services.
 
 The class diagram of the Domain model is shown in the figure below:
 
@@ -64,66 +74,57 @@ The class diagram of the Domain model is shown in the figure below:
 
 ### Services
 
-> OrderService
+Below is a list of available services with corresponding methods for implementation.
 
-* `getAllOrders()`
-  Retrieves a list of all orders placed in the system.
-* `getOrderById(id)`
-  Fetches a specific order identified by its ID.
-* `deleteOrderById(id)`
-  Deletes an order from the system based on its ID.
+> Note: You can add your own methods to existing services, as well as create additional services.
+
+#### OrderService
+
+* `getAllOrdersByClient(email)`
+  Retrieves a list of all orders by client's email placed in the system.
+* `getAllOrdersByEmployee(email)`
+  Retrieves a list of all orders by employee's email placed in the system.
 * `addOrder(order)`
   Adds a new order to the system, incorporating the provided order details.
 
-> EmployeeService
+#### EmployeeService
 
 * `getAllEmployees()`
   Retrieves a list of all employees registered in the system.
-* `getEmployeeById(id)`
-  Fetches details of a specific employee based on their ID.
-* `updateEmployeeById(id, employee)`
-  Updates the information of an existing employee identified by their ID with the provided details.
-* `deleteEmployeeById(id)`
-  Removes an employee from the system based on their ID.
+* `getEmployeeByEmail(email)`
+  Fetches details of a specific employee based on their email.
+* `updateEmployeeByEmail(email, employee)`
+  Updates the information of an existing employee identified by their email with the provided details.
+* `deleteEmployeeByEmail(email)`
+  Removes an employee from the system based on their email.
 * `addEmployee(employee)`
   Registers a new employee in the system with the provided details.
 
-> ClientService
+#### ClientService
 
 * `getAllClients()`
   Retrieves a list of all clients (customers) registered in the system.
-* `getClientById(id)`
-  Fetches details of a specific client based on their ID.
-* `updateClientById(id, client)`
-  Updates the information of an existing client identified by their ID with the provided details.
-* `deleteClientById(id)`
-  Removes a client from the system based on their ID.
+* `getClientByEmail(email)`
+  Fetches details of a specific client based on their email.
+* `updateClientByEmail(email, client)`
+  Updates the information of an existing client identified by their email with the provided details.
+* `deleteClientByEmail(email)`
+  Removes a client from the system based on their email.
 * `addClient(client)`
   Registers a new client in the system with the provided details.
 
-> BookService
+#### BookService
 
 * `getAllBooks()`
   Retrieves a list of all books available in the store.
-* `getBookById(id)`
-  Fetches details of a specific book based on its ID.
-* `updateBookById(id, book)`
-  Updates the information of an existing book identified by its ID with the provided details.
-* `deleteBookById(id)`
-  Removes a book from the system based on its ID.
+* `getBookByName(name)`
+  Fetches details of a specific book based on its name.
+* `updateBookByName(name, book)`
+  Updates the information of an existing book identified by its name with the provided details.
+* `deleteBookByName(name)`
+  Removes a book from the system based on its name.
 * `addBook(book)`
   Adds a new book to the system with the provided details.
-
-> BookOrderService
-
-* `getActualCart(id)`
-  Retrieves the current shopping cart (order) of a specific client (customer).
-* `isBooksAdded()`
-  Checks if any book is already added to the client's cart.
-* `addBookItemToOrder(book)`
-  Adds a book to the client's shopping cart.
-* `calculateOrderPrice(bookItems, operation)`
-  Calculates the total price of the items in the client's shopping cart.
 
 ## Requirements
 
