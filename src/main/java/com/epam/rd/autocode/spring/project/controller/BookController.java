@@ -1,5 +1,5 @@
 package com.epam.rd.autocode.spring.project.controller;
 
-public interface BookController {
+public class BookController {
     // TODO Place your code here
 }

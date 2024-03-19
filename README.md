@@ -21,13 +21,11 @@ Your project is organized into several packages. Here's a brief overview of each
 
 #### `controller`
 
-- Consists of interfaces with declared methods for all controllers.
-
-- **`impl`**: Includes implementations of declared controllers.
+- Contains controller files.
 
 #### `dto`
 
-- Contains DTO (Data Transfer Object) files.
+- Contains DTO files.
 
 #### `model`
 
@@ -80,50 +78,50 @@ Below is a list of available services with corresponding methods for implementat
 
 #### OrderService
 
-* `getAllOrdersByClient(email)`
+* `getAllOrdersByClient(email: String)`
   Retrieves a list of all orders by client's email placed in the system.
-* `getAllOrdersByEmployee(email)`
+* `getAllOrdersByEmployee(email: String)`
   Retrieves a list of all orders by employee's email placed in the system.
-* `addOrder(order)`
+* `addOrder(order: OrderDTO)`
   Adds a new order to the system, incorporating the provided order details.
 
 #### EmployeeService
 
 * `getAllEmployees()`
   Retrieves a list of all employees registered in the system.
-* `getEmployeeByEmail(email)`
+* `getEmployeeByEmail(email: String)`
   Fetches details of a specific employee based on their email.
-* `updateEmployeeByEmail(email, employee)`
+* `updateEmployeeByEmail(email: String, employee: EmployeeDTO)`
   Updates the information of an existing employee identified by their email with the provided details.
-* `deleteEmployeeByEmail(email)`
+* `deleteEmployeeByEmail(email: String)`
   Removes an employee from the system based on their email.
-* `addEmployee(employee)`
+* `addEmployee(employee: EmployeeDTO)`
   Registers a new employee in the system with the provided details.
 
 #### ClientService
 
 * `getAllClients()`
   Retrieves a list of all clients (customers) registered in the system.
-* `getClientByEmail(email)`
+* `getClientByEmail(email: String)`
   Fetches details of a specific client based on their email.
-* `updateClientByEmail(email, client)`
+* `updateClientByEmail(email: String, client: ClientDTO)`
   Updates the information of an existing client identified by their email with the provided details.
-* `deleteClientByEmail(email)`
+* `deleteClientByEmail(email: String)`
   Removes a client from the system based on their email.
-* `addClient(client)`
+* `addClient(client: ClientDTO)`
   Registers a new client in the system with the provided details.
 
 #### BookService
 
 * `getAllBooks()`
   Retrieves a list of all books available in the store.
-* `getBookByName(name)`
+* `getBookByName(name: String)`
   Fetches details of a specific book based on its name.
-* `updateBookByName(name, book)`
+* `updateBookByName(name: String, book: BookDTO)`
   Updates the information of an existing book identified by its name with the provided details.
-* `deleteBookByName(name)`
+* `deleteBookByName(name: String)`
   Removes a book from the system based on its name.
-* `addBook(book)`
+* `addBook(book: BookDTO)`
   Adds a new book to the system with the provided details.
 
 ## Requirements
@@ -145,17 +143,14 @@ Consider the following additional features:
 
 - Incorporate `Logging` for comprehensive system monitoring.
 - Implement `Pagination and Sorting` for enhanced data presentation.
-- Utilize Other Spring technologies such as `Spring HATEOAS`, `Spring REST` or else.
-- Integrate `Swagger API` for streamlined API documentation and testing.
 
 ## Recommendations
 
 > Use wrapper classes (like Long, Integer, etc.) instead of primitive types whenever possible.
 
 - Utilize `Lombok` for streamlined Java code.
-- Employ tools like `Postman` or `Insomnia` for API testing.
-- Implement `ModelMapper` for easy mapping between objects.
-- Utilize `Thymeleaf` for dynamic HTML rendering.
+- Use `ModelMapper` for easy mapping between objects.
+- Utilize `Thymeleaf` for HTML templating.
 - Explore the `test` folder to execute provided test cases for your solution.
 - Refer to the `main\resources\sql` folder for SQL scripts to initialize data.
 

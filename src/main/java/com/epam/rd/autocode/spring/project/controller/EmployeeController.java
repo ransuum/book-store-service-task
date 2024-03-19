@@ -1,5 +1,5 @@
 package com.epam.rd.autocode.spring.project.controller;
 
-public interface EmployeeController {
+public class EmployeeController {
     // TODO Place your code here
 }
