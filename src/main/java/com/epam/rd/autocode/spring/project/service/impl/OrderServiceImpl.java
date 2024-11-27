@@ -7,7 +7,6 @@ import com.epam.rd.autocode.spring.project.repo.ClientRepository;
 import com.epam.rd.autocode.spring.project.repo.EmployeeRepository;
 import com.epam.rd.autocode.spring.project.repo.OrderRepository;
 import com.epam.rd.autocode.spring.project.service.OrderService;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -21,7 +20,9 @@ public class OrderServiceImpl implements OrderService {
     private final ClientRepository clientRepository;
     private final EmployeeRepository employeeRepository;
 
-    public OrderServiceImpl(ModelMapper modelMapper, OrderRepository orderRepository, ClientRepository clientRepository, EmployeeRepository employeeRepository) {
+    public OrderServiceImpl(ModelMapper modelMapper, OrderRepository orderRepository,
+                            ClientRepository clientRepository,
+                            EmployeeRepository employeeRepository) {
         this.modelMapper = modelMapper;
         this.orderRepository = orderRepository;
         this.clientRepository = clientRepository;

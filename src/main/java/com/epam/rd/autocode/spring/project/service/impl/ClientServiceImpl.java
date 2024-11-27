@@ -6,20 +6,23 @@ import com.epam.rd.autocode.spring.project.exception.NotFoundException;
 import com.epam.rd.autocode.spring.project.model.Client;
 import com.epam.rd.autocode.spring.project.repo.ClientRepository;
 import com.epam.rd.autocode.spring.project.service.ClientService;
+import com.epam.rd.autocode.spring.project.util.checking_validator.Validator;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Service
 public class ClientServiceImpl implements ClientService {
     private final ClientRepository clientRepository;
     private final ModelMapper modelMapper;
+    private final Validator<Client, ClientDTO> validator;
 
-    public ClientServiceImpl(ClientRepository clientRepository, ModelMapper modelMapper) {
+    public ClientServiceImpl(ClientRepository clientRepository, ModelMapper modelMapper, Validator<Client, ClientDTO> validator) {
         this.clientRepository = clientRepository;
         this.modelMapper = modelMapper;
+        this.validator = validator;
     }
 
     @Override
@@ -40,17 +43,7 @@ public class ClientServiceImpl implements ClientService {
         Client clientEntity = clientRepository.findByEmail(email)
                 .orElseThrow(()
                         -> new NotFoundException("Not found employee with email " + email));
-
-        if (client.getBalance() != null && !client.getBalance().equals(clientEntity.getBalance()))
-            clientEntity.setBalance(client.getBalance());
-        if (client.getName() != null && !client.getName().equals(clientEntity.getName()))
-            clientEntity.setName(client.getName());
-        if (client.getEmail() != null && !client.getEmail().equals(clientEntity.getEmail()))
-            clientEntity.setEmail(client.getEmail());
-        if (client.getPassword() != null)
-            clientEntity.setPassword(new BCryptPasswordEncoder().encode(client.getPassword()));
-
-        return modelMapper.map(clientRepository.save(clientEntity), ClientDTO.class);
+        return modelMapper.map(clientRepository.save(validator.validate(clientEntity, client)), ClientDTO.class);
     }
 
     @Override
@@ -70,7 +63,7 @@ public class ClientServiceImpl implements ClientService {
         client1.setEmail(client.getEmail());
         client1.setName(client.getName());
         client1.setBalance(client.getBalance());
-        client1.setPassword(new BCryptPasswordEncoder().encode(client.getPassword()));
+        client1.setPassword(client.getPassword());
 
         return modelMapper.map(client1, ClientDTO.class);
     }

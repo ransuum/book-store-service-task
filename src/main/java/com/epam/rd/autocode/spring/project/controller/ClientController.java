@@ -1,9 +1,8 @@
 package com.epam.rd.autocode.spring.project.controller;
 
 import com.epam.rd.autocode.spring.project.dto.ClientDTO;
-import com.epam.rd.autocode.spring.project.dto.EmployeeDTO;
 import com.epam.rd.autocode.spring.project.service.ClientService;
-import com.epam.rd.autocode.spring.project.util.pagging.PageConfiguration;
+import com.epam.rd.autocode.spring.project.util.pagging.PageConfig;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,16 +14,17 @@ import java.util.Map;
 @RequestMapping("/clients")
 public class ClientController {
     private final ClientService clientService;
-    private final PageConfiguration pageConfiguration;
+    private final PageConfig<ClientDTO> pageConfig;
 
-    public ClientController(ClientService clientService, PageConfiguration pageConfiguration) {
+    public ClientController(ClientService clientService, PageConfig<ClientDTO> pageConfig) {
         this.clientService = clientService;
-        this.pageConfiguration = pageConfiguration;
+        this.pageConfig = pageConfig;
     }
 
     @GetMapping
-    public ResponseEntity<Map<String, Object>> getClients(Integer page, Integer size) {
-        return ResponseEntity.ok(pageConfiguration.response(clientService.getAllClients(PageRequest.of(page, size))));
+    public ResponseEntity<Map<String, Object>> getClients(@RequestParam(defaultValue = "0", required = false) Integer page,
+                                                          @RequestParam(defaultValue = "10", required = false) Integer size) {
+        return ResponseEntity.ok(pageConfig.response(clientService.getAllClients(PageRequest.of(page, size))));
     }
 
     @GetMapping("/by-email/{email}")

@@ -2,7 +2,7 @@ package com.epam.rd.autocode.spring.project.controller;
 
 import com.epam.rd.autocode.spring.project.dto.BookDTO;
 import com.epam.rd.autocode.spring.project.service.BookService;
-import com.epam.rd.autocode.spring.project.util.pagging.PageConfiguration;
+import com.epam.rd.autocode.spring.project.util.pagging.PageConfig;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,17 +14,17 @@ import java.util.Map;
 @RequestMapping("/books")
 public class BookController {
     private final BookService bookService;
-    private final PageConfiguration pageConfiguration;
+    private final PageConfig<BookDTO> pageConfig;
 
-    public BookController(BookService bookService, PageConfiguration pageConfiguration) {
+    public BookController(BookService bookService, PageConfig<BookDTO> pageConfig) {
         this.bookService = bookService;
-        this.pageConfiguration = pageConfiguration;
+        this.pageConfig = pageConfig;
     }
 
     @GetMapping
-    public ResponseEntity<Map<String, Object>> getAllBooks(@RequestParam Integer page,
-                                                           @RequestParam Integer size) {
-        return ResponseEntity.ok(pageConfiguration.response(bookService.getAllBooks(PageRequest.of(page, size))));
+    public ResponseEntity<Map<String, Object>> getAllBooks(@RequestParam(defaultValue = "0", required = false) Integer page,
+                                                           @RequestParam(defaultValue = "10", required = false) Integer size) {
+        return ResponseEntity.ok(pageConfig.response(bookService.getAllBooks(PageRequest.of(page, size))));
     }
 
     @GetMapping("/by-name/{name}")
