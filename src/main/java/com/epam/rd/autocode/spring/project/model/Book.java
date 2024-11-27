@@ -16,41 +16,41 @@ import java.time.LocalDate;
 @Data
 @Builder
 @Entity
-@Table(name = "books")
+@Table(name = "BOOKS")
 public class Book {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "NAME", nullable = false)
+    @Column(name = "name", nullable = false)
     private String name;
 
-    @Column(name = "GENRE", nullable = false)
+    @Column(name = "genre", nullable = false)
     private String genre;
 
-    @Column(name = "AGE_GROUP", nullable = false)
+    @Column(name = "age_group", nullable = false)
     @Enumerated(EnumType.STRING)
     private AgeGroup ageGroup;
 
-    @Column(name = "PRICE", nullable = false)
+    @Column(name = "price", nullable = false)
     private BigDecimal price;
 
-    @Column(name = "PUBLICATION_DATE", nullable = false)
+    @Column(name = "publication_year", nullable = false)
     private LocalDate publicationDate;
 
-    @Column(name = "AUTHOR", nullable = false)
+    @Column(name = "author", nullable = false)
     private String author;
 
-    @Column(name = "NUMBER_OF_PAGES", nullable = false)
+    @Column(name = "number_of_pages", nullable = false)
     private Integer pages;
 
-    @Column(name = "CHARACTERISTICS")
+    @Column(name = "characteristics")
     private String characteristics;
 
-    @Column(name = "DESCRIPTION")
+    @Column(name = "description")
     private String description;
 
-    @Column(name = "LANGUAGE", nullable = false)
+    @Column(name = "language", nullable = false)
     @Enumerated(EnumType.STRING)
     private Language language;
 }

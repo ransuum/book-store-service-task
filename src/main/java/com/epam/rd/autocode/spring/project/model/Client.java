@@ -7,10 +7,10 @@ import java.math.BigDecimal;
 
 @AllArgsConstructor
 @NoArgsConstructor
-@Entity
 @Data
-@Table(name = "clients")
-@PrimaryKeyJoinColumn(name = "user_id")
+@Entity
+@Builder
+@Table(name = "CLIENTS")
 public class Client extends User {
 
     @Column(name = "BALANCE", nullable = false)

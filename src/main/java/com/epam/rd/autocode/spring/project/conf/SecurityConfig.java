@@ -10,29 +10,29 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 public class SecurityConfig {
-    @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http
-                .csrf(AbstractHttpConfigurer::disable)
-                .authorizeRequests(authorizeReq ->
-                    authorizeReq
-                            .requestMatchers("/api/books/**").permitAll()
-                            .requestMatchers("/api/employees/**").hasRole("EMPLOYEE")
-                            .requestMatchers("/api/clients/**").hasRole("CLIENT")
-                            .requestMatchers("/api/order/**").hasRole("CLIENT")
-                            .requestMatchers("/api/order/**").hasRole("EMPLOYEE")
-                            .anyRequest().authenticated())
-                .formLogin(form -> form
-                        .loginPage("/login").permitAll()
-                )
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll()
-                );
-
-        return http.build();
-    }
+//    @Bean
+//    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+//        http
+//                .csrf(AbstractHttpConfigurer::disable)
+//                .authorizeRequests(authorizeReq ->
+//                    authorizeReq
+//                            .requestMatchers("/api/books/**").permitAll()
+//                            .requestMatchers("/api/employees/**").hasRole("EMPLOYEE")
+//                            .requestMatchers("/api/clients/**").hasRole("CLIENT")
+//                            .requestMatchers("/api/orders/**").hasRole("CLIENT")
+//                            .requestMatchers("/api/orders/**").hasRole("EMPLOYEE")
+//                            .anyRequest().authenticated())
+//                .formLogin(form -> form
+//                        .loginPage("/login").permitAll()
+//                )
+//                .logout(logout -> logout
+//                        .logoutUrl("/logout")
+//                        .logoutSuccessUrl("/login?logout")
+//                        .permitAll()
+//                );
+//
+//        return http.build();
+//    }
 
     @Bean
     public PasswordEncoder passwordEncoder() {
