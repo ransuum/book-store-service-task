@@ -22,13 +22,10 @@ public class Employee extends User {
     @Column(name = "PHONE", nullable = false)
     private String phone;
 
-    public Employee(Long id, String email, String password, String name, LocalDate birthDate) {
+    public Employee(Long id, String email, String password, String name, LocalDate birthDate, String phone) {
         super(id, email, password, name);
         this.birthDate = birthDate;
-    }
-
-    public Employee(LocalDate birthDate) {
-        this.birthDate = birthDate;
+        this.phone = phone;
     }
 
     @Override
