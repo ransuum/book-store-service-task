@@ -3,6 +3,7 @@ package com.epam.rd.autocode.spring.project.controller.withoutSite;
 import com.epam.rd.autocode.spring.project.dto.EmployeeDTO;
 import com.epam.rd.autocode.spring.project.service.EmployeeService;
 import com.epam.rd.autocode.spring.project.util.pagging.PageConfig;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class EmployeeController {
 
     @PutMapping("/{email}")
     public ResponseEntity<EmployeeDTO> updateEmployee(@PathVariable String email,
-                                                      @RequestBody EmployeeDTO employeeDTO) {
+                                                      @RequestBody @Valid EmployeeDTO employeeDTO) {
         return ResponseEntity.ok(employeeService.updateEmployeeByEmail(email, employeeDTO));
     }
 
@@ -45,7 +46,7 @@ public class EmployeeController {
     }
 
     @PostMapping
-    public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody EmployeeDTO employeeDTO) {
+    public ResponseEntity<EmployeeDTO> addEmployee(@RequestBody @Valid EmployeeDTO employeeDTO) {
         return new ResponseEntity<>(employeeService.addEmployee(employeeDTO), HttpStatus.CREATED);
     }
 }

@@ -3,6 +3,7 @@ package com.epam.rd.autocode.spring.project.controller.withoutSite;
 import com.epam.rd.autocode.spring.project.dto.ClientDTO;
 import com.epam.rd.autocode.spring.project.service.ClientService;
 import com.epam.rd.autocode.spring.project.util.pagging.PageConfig;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,7 +35,7 @@ public class ClientController {
 
     @PutMapping("/{email}")
     public ResponseEntity<ClientDTO> updateClient(@PathVariable String email,
-                                                      @RequestBody ClientDTO clientDTO) {
+                                                      @RequestBody @Valid ClientDTO clientDTO) {
         return ResponseEntity.ok(clientService.updateClientByEmail(email, clientDTO));
     }
 
@@ -45,7 +46,7 @@ public class ClientController {
     }
 
     @PostMapping
-    public ResponseEntity<ClientDTO> addClient(@RequestBody ClientDTO clientDTO) {
+    public ResponseEntity<ClientDTO> addClient(@RequestBody @Valid ClientDTO clientDTO) {
         return new ResponseEntity<>(clientService.addClient(clientDTO), HttpStatus.CREATED);
     }
 }

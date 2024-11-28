@@ -30,4 +30,9 @@ public class Employee extends User {
     public Employee(LocalDate birthDate) {
         this.birthDate = birthDate;
     }
+
+    @Override
+    public String getRole() {
+        return "BOOK";
+    }
 }

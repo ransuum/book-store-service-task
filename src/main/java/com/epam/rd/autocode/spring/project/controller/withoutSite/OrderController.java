@@ -3,6 +3,7 @@ package com.epam.rd.autocode.spring.project.controller.withoutSite;
 import com.epam.rd.autocode.spring.project.dto.OrderDTO;
 import com.epam.rd.autocode.spring.project.service.OrderService;
 import com.epam.rd.autocode.spring.project.util.pagging.PageConfig;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -36,7 +37,7 @@ public class OrderController {
     }
 
     @PostMapping
-    public ResponseEntity<OrderDTO> createOrder(@RequestBody OrderDTO orderDTO) {
+    public ResponseEntity<OrderDTO> createOrder(@RequestBody @Valid OrderDTO orderDTO) {
         return new ResponseEntity<>(orderService.addOrder(orderDTO), HttpStatus.CREATED);
     }
 

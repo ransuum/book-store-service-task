@@ -23,4 +23,9 @@ public class Client extends User {
         super(id, email, password, name);
         this.balance = balance;
     }
+
+    @Override
+    public String getRole() {
+        return "CLIENT";
+    }
 }

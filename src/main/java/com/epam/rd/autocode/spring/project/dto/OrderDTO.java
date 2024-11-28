@@ -1,5 +1,6 @@
 package com.epam.rd.autocode.spring.project.dto;
 
+import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,9 +15,21 @@ import java.util.List;
 @Data
 @Builder
 public class OrderDTO{
+    @NotBlank(message = "Client email cannot be blank")
+    @Email(message = "Client email should be valid")
     private String clientEmail;
+
+    @NotBlank(message = "Employee email cannot be blank")
+    @Email(message = "Employee email should be valid")
     private String employeeEmail;
+
+    @NotNull(message = "Order date cannot be null")
+    @PastOrPresent(message = "Order date must be in the past or present")
     private LocalDateTime orderDate;
+
+    @NotNull(message = "Price cannot be null")
+    @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than zero")
     private BigDecimal price;
+
     private List<BookItemDTO> bookItems;
 }

@@ -3,6 +3,7 @@ package com.epam.rd.autocode.spring.project.controller.withoutSite;
 import com.epam.rd.autocode.spring.project.dto.BookDTO;
 import com.epam.rd.autocode.spring.project.service.BookService;
 import com.epam.rd.autocode.spring.project.util.pagging.PageConfig;
+import jakarta.validation.Valid;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,13 +30,13 @@ public class BookController {
     }
 
     @PostMapping
-    public ResponseEntity<BookDTO> createBook(@RequestBody BookDTO bookDTO) {
+    public ResponseEntity<BookDTO> createBook(@RequestBody @Valid BookDTO bookDTO) {
         return new ResponseEntity<>(bookService.addBook(bookDTO), HttpStatus.CREATED);
     }
 
     @PutMapping("/{name}")
     public ResponseEntity<BookDTO> updateBook(@PathVariable String name,
-                                              @RequestBody BookDTO bookDTO) {
+                                              @RequestBody @Valid BookDTO bookDTO) {
         return ResponseEntity.ok(bookService.updateBookByName(name, bookDTO));
     }
 
