@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Book</title>
+</head>
+<body>
+<h1>Create a New Book</h1>
+<form th:action="@{/create-book}" method="post" th:object="${newBook}">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" th:field="*{name}" required><br>
+
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" name="genre" th:field="*{genre}" required><br>
+
+    <label for="ageGroup">Age Group:</label>
+    <input type="text" id="ageGroup" name="ageGroup" th:field="*{ageGroup}" required><br>
+
+    <label for="price">Price:</label>
+    <input type="number" id="price" name="price" th:field="*{price}" required><br>
+
+    <label for="publicationDate">Publication Date:</label>
+    <input type="date" id="publicationDate" name="publicationDate" th:field="*{publicationDate}" required><br>
+
+    <label for="author">Author:</label>
+    <input type="text" id="author" name="author" th:field="*{author}" required><br>
+
+    <label for="pages">Pages:</label>
+    <input type="number" id="pages" name="pages" th:field="*{pages}" required><br>
+
+    <label for="characteristics">Characteristics:</label>
+    <textarea id="characteristics" name="characteristics" th:field="*{characteristics}" required></textarea><br>
+
+    <label for="description">Description:</label>
+    <textarea id="description" name="description" th:field="*{description}" required></textarea><br>
+
+    <label for="language">Language:</label>
+    <input type="text" id="language" name="language" th:field="*{language}" required><br>
+
+    <button type="submit">Create Book</button>
+</form>
+</body>
+</html>

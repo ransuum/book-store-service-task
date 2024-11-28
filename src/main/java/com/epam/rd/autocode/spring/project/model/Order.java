@@ -33,7 +33,7 @@ public class Order {
     private LocalDateTime orderDate;
 
     @Column(name = "BALANCE", nullable = false)
-    private BigDecimal balance;
+    private BigDecimal price;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<BookItem> bookItems = new ArrayList<>();

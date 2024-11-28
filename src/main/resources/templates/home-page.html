@@ -103,14 +103,13 @@
     .book-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
+        grid-gap: 20px;
     }
     .book-card {
-        background-color: #ecf0f1;
-        border-radius: 10px;
-        overflow: hidden;
-        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        transition: transform 0.3s ease;
+        border: 1px solid #ccc;
+        padding: 10px;
+        border-radius: 5px;
+        box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
     }
     .book-card:hover {
         transform: translateY(-5px);
@@ -120,8 +119,21 @@
         height: 300px;
         object-fit: cover;
     }
-    .book-info {
-        padding: 1rem;
+    .book-info p {
+        margin-bottom: 5px;
+    }
+    .delete-button {
+        background-color: #e74c3c;
+        color: white;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .delete-button:hover {
+        background-color: #c0392b;
     }
     .book-info h3 {
         margin-bottom: 0.5rem;
@@ -214,6 +226,9 @@
             <h1>Welcome to Bookworm's Haven</h1>
             <p>Discover your next favorite book in our curated collection</p>
             <a href="#books" class="cta-button">Explore Books</a>
+            <form th:action="@{/create}" method="get">
+                <button type="submit" class="create-button">Create Book</button>
+            </form>
         </div>
     </section>
 
@@ -233,6 +248,9 @@
                     <p th:text="'Price: $' + ${book.price}">Price</p>
                     <p th:text="'Published: ' + ${book.publicationDate}">Publication Date</p>
                     <p th:text="${book.description}">Description</p>
+                    <form th:action="@{/deleteBook/{name}(name=${book.name})}" method="post">
+                        <button type="submit" class="delete-button">Delete Book</button>
+                    </form>
                 </div>
             </div>
         </div>

@@ -2,9 +2,11 @@ package com.epam.rd.autocode.spring.project.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @MappedSuperclass
+@NoArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User {
     @Id
@@ -19,4 +21,11 @@ public abstract class User {
 
     @Column(name = "NAME")
     private String name;
+
+    public User(Long id, String email, String password, String name) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+    }
 }

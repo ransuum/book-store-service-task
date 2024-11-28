@@ -1,9 +1,8 @@
-package com.epam.rd.autocode.spring.project.controller;
+package com.epam.rd.autocode.spring.project.controller.withoutSite;
 
 import com.epam.rd.autocode.spring.project.dto.EmployeeDTO;
 import com.epam.rd.autocode.spring.project.service.EmployeeService;
 import com.epam.rd.autocode.spring.project.util.pagging.PageConfig;
-import com.epam.rd.autocode.spring.project.util.pagging.PageOrderConfiguration;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

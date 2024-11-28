@@ -45,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO addOrder(OrderDTO order) {
         return modelMapper.map(Order.builder()
                 .orderDate(order.getOrderDate())
-                .balance(order.getPrice())
+                .price(order.getPrice())
                 .client(clientRepository.findByEmail(order.getClientEmail())
                         .orElseThrow(()
                                 -> new NotFoundException("Not found client with email " + order.getClientEmail())))

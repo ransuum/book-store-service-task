@@ -1,19 +1,16 @@
-package com.epam.rd.autocode.spring.project.controller;
+package com.epam.rd.autocode.spring.project.controller.withoutSite;
 
 import com.epam.rd.autocode.spring.project.dto.BookDTO;
 import com.epam.rd.autocode.spring.project.service.BookService;
 import com.epam.rd.autocode.spring.project.util.pagging.PageConfig;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-//@Controller
+
 @RestController
 @RequestMapping("/books")
 public class BookController {
@@ -24,30 +21,6 @@ public class BookController {
         this.bookService = bookService;
         this.pageConfig = pageConfig;
     }
-
-//    @GetMapping("/home")
-//    public String viewBooksPage(
-//            @RequestParam(defaultValue = "0", required = false) Integer page,
-//            @RequestParam(defaultValue = "10", required = false) Integer size,
-//            Model model
-//    ) {
-//        Page<BookDTO> books = bookService.getAllBooks(PageRequest.of(page, size));
-//        model.addAttribute("books", books);
-//        return "home-page";
-//    }
-//
-////    @DeleteMapping("/{name}")
-////    public String deleteBookOnThyme(@PathVariable String name) {
-////        bookService.deleteBookByName(name);
-////        return "delete-book";
-////    }
-////
-////    @PostMapping
-////    public String createBookOnThyme(@RequestBody BookDTO bookDTO) {
-////        return "create-book";
-////    }
-
-    ///////////////////////////////////////////////////////////////////////// without thymeleaf ->
 
     @DeleteMapping("/{name}")
     public ResponseEntity<?> deleteBook(@PathVariable String name) {

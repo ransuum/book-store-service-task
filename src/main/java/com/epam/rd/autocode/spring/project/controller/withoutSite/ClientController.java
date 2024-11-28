@@ -1,4 +1,4 @@
-package com.epam.rd.autocode.spring.project.controller;
+package com.epam.rd.autocode.spring.project.controller.withoutSite;
 
 import com.epam.rd.autocode.spring.project.dto.ClientDTO;
 import com.epam.rd.autocode.spring.project.service.ClientService;
