@@ -13,9 +13,9 @@ public class PageConfig<T> {
     public Map<String, Object> response(Page<T> page) {
         List<T> list = page.getContent();
         Map<String, Object> result = new HashMap<>();
-        result.put(list.get(0).getClass().getSimpleName().toLowerCase(), list);
-        result.put("totalPages", page.getTotalElements());
+        result.put(list.get(0).getClass().getSimpleName().toLowerCase().replace("dto", ""), list);
         result.put("totalElements", page.getTotalElements());
+        result.put("totalPages", page.getTotalPages());
         result.put("current_page", page.getNumber());
 
         return result;
