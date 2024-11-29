@@ -12,16 +12,11 @@ import java.util.List;
 @NoArgsConstructor
 @Data
 @Entity
-@Builder
 @Table(name = "CLIENTS")
 public class Client extends User {
 
     @Column(name = "BALANCE", nullable = false)
     private BigDecimal balance;
-
-    public Client(BigDecimal balance) {
-        this.balance = balance;
-    }
 
     public Client(String email, String password, String name, BigDecimal balance) {
         super(email, password, name);

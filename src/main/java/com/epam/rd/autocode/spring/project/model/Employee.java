@@ -26,7 +26,7 @@ public class Employee extends User {
     @Column(name = "PHONE", nullable = false)
     private String phone;
 
-    public Employee( String email, String password, String name, LocalDate birthDate, String phone) {
+    public Employee(String email, String password, String name, LocalDate birthDate, String phone) {
         super(email, password, name);
         this.birthDate = birthDate;
         this.phone = phone;

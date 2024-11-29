@@ -2,20 +2,15 @@ package com.epam.rd.autocode.spring.project.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
-import java.util.Objects;
 
 @Data
 @MappedSuperclass
 @NoArgsConstructor
-@ToString(exclude = {"password"})
-@EqualsAndHashCode(exclude = {"password"})
 @Inheritance(strategy = InheritanceType.JOINED)
 public abstract class User implements UserDetails {
     @Id

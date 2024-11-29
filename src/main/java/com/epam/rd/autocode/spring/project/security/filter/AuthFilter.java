@@ -39,6 +39,7 @@ public class AuthFilter {
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authorizeHttpRequests(authorize -> authorize
                         .requestMatchers(HttpMethod.POST, "/login/*").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/home").permitAll()
                         .requestMatchers(HttpMethod.POST, "/register/*").permitAll()
                         .requestMatchers(HttpMethod.POST, "/employees/**").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.POST, "/clients/**").hasRole("CLIENT")
