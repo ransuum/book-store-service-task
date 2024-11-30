@@ -41,6 +41,7 @@ public class AuthFilter {
                         .requestMatchers(HttpMethod.POST, "/login/*").permitAll()
                         .requestMatchers(HttpMethod.GET, "/home").permitAll()
                         .requestMatchers(HttpMethod.POST, "/register/*").permitAll()
+                        .requestMatchers(HttpMethod.DELETE, "/logout").permitAll()
                         .requestMatchers(HttpMethod.POST, "/employees/**").hasRole("EMPLOYEE")
                         .requestMatchers(HttpMethod.POST, "/clients/**").hasRole("CLIENT")
                         .anyRequest().authenticated())

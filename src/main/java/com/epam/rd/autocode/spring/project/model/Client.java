@@ -24,7 +24,7 @@ public class Client extends User {
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_CLIENT"));
+    public String getRole() {
+        return "CLIENT";
     }
 }
