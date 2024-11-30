@@ -62,8 +62,9 @@ public class SecurityConfig {
                         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.GET, "/home", "/register", "/login").permitAll()
+                                .requestMatchers(HttpMethod.POST, "/sign-in").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/logout", "/create").hasAnyRole("EMPLOYEE", "CLIENT")
-                                .requestMatchers(HttpMethod.DELETE, "/deleteBook/*").hasRole("EMPLOYEE")
+                                .requestMatchers(HttpMethod.POST, "/deleteBook/*").hasRole("EMPLOYEE")
                         )
                         .sessionManagement(session -> session
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

@@ -78,22 +78,61 @@
         .register-link a:hover {
             text-decoration: underline;
         }
+
+        .home-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background-color: #4a5568;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: #2d3748;
+        }
     </style>
 </head>
 <body>
 <div class="container">
     <h2>Welcome Back</h2>
-    <form th:action="@{/login}" method="post">
-        <div th:if="${param.error}">
-            Invalid username or password.
+    <form th:action="@{/sign-in}" method="post" th:object="${loginRequest}">
+        <!-- Display error message if exists -->
+        <div th:if="${param.error}" class="error-message">
+            Invalid email or password
         </div>
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
+
+        <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="email" placeholder="Enter your email"
+                   required autofocus>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" name="password"
+                   placeholder="Enter your password" required>
+        </div>
+
+        <div class="form-group">
+            <input type="checkbox" id="rememberMe" name="remember-me">
+            <label for="rememberMe">Remember me</label>
+        </div>
+
+        <div class="form-group">
+            <a href="#" class="forgot-password">Forgot Password?</a>
+        </div>
+
         <button type="submit">Login</button>
     </form>
     <div class="register-link">
-        Don't have an account? <a th:action="@{/home}">Register</a>
+        Don't have an account? <a th:href="@{/register}">Register</a>
     </div>
+    <a th:href="@{/home}" class="home-button">Return to Home</a>
 </div>
 </body>
 </html>
