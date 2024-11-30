@@ -19,7 +19,7 @@ public class HomePageController {
     @GetMapping("/home")
     public String viewBooksPage(
             @RequestParam(defaultValue = "0", required = false) Integer page,
-            @RequestParam(defaultValue = "10", required = false) Integer size,
+            @RequestParam(defaultValue = "20", required = false) Integer size,
             Model model
     ) {
         Page<BookDTO> books = bookService.getAllBooks(PageRequest.of(page, size));
@@ -39,9 +39,4 @@ public class HomePageController {
         return "create";
     }
 
-    @PostMapping("/create-book")
-    public String createBook(@RequestBody BookDTO bookDTO) {
-        bookService.addBook(bookDTO);
-        return "redirect:/home";
-    }
 }
