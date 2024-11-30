@@ -36,7 +36,7 @@ public class OrderController {
         return ResponseEntity.ok(pageConfig.response(orderService.getOrdersByEmployee(employeeEmail, PageRequest.of(page, size))));
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<OrderDTO> createOrder(@RequestBody @Valid OrderDTO orderDTO) {
         return new ResponseEntity<>(orderService.addOrder(orderDTO), HttpStatus.CREATED);
     }

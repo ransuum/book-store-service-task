@@ -1,5 +1,6 @@
 package com.epam.rd.autocode.spring.project.util.auth_management.register;
 
+import com.epam.rd.autocode.spring.project.exception.AlreadyExistException;
 import com.epam.rd.autocode.spring.project.model.Employee;
 import com.epam.rd.autocode.spring.project.model.enums.AuthoritiesType;
 import com.epam.rd.autocode.spring.project.model.request.register.EmployeeReq;
@@ -19,6 +20,11 @@ public class EmployeeRegister implements RegisterManager {
     @Override
     public <T extends UserReq> T register(T user) {
         EmployeeReq employee = modelMapper.map(user, EmployeeReq.class);
+
+        employeeRepository.findByEmail(user.getEmail()).ifPresent(employee1 -> {
+            throw new AlreadyExistException("You can't use this employee email");
+        });
+
         employeeRepository.save(new Employee(employee.getEmail(),
                 new BCryptPasswordEncoder().encode(employee.getPassword()),
                 employee.getName(), employee.getBirthDate(), employee.getPhone()));

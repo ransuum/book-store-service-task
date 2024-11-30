@@ -22,7 +22,7 @@ public class EmployeeController {
         this.pageConfig = pageConfig;
     }
 
-    @GetMapping
+    @GetMapping("/get-all")
     public ResponseEntity<Map<String, Object>> getEmployees(@RequestParam(defaultValue = "0", required = false) Integer page,
                                                             @RequestParam(defaultValue = "10", required = false) Integer size) {
         return ResponseEntity.ok(pageConfig.response(employeeService.getAllEmployees(PageRequest.of(page, size))));

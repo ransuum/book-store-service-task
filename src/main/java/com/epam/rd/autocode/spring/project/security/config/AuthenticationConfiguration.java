@@ -21,10 +21,9 @@ public class AuthenticationConfiguration implements AuthenticationProvider {
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        String username = authentication.getName();
         String password = authentication.getCredentials().toString();
 
-        User user = (User) userDetailsService.loadUserByUsername(username);
+        User user = (User) userDetailsService.loadUserByUsername(authentication.getName());
 
         if (!passwordEncoder.matches(password, user.getPassword())) {
             throw new BadCredentialsException("Invalid credentials");

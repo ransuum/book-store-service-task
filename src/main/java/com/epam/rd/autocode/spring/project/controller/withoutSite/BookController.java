@@ -29,7 +29,7 @@ public class BookController {
         return ResponseEntity.ok("DELETED");
     }
 
-    @PostMapping
+    @PostMapping("/create")
     public ResponseEntity<BookDTO> createBook(@RequestBody @Valid BookDTO bookDTO) {
         return new ResponseEntity<>(bookService.addBook(bookDTO), HttpStatus.CREATED);
     }
@@ -40,7 +40,7 @@ public class BookController {
         return ResponseEntity.ok(bookService.updateBookByName(name, bookDTO));
     }
 
-    @GetMapping
+    @GetMapping("/get-all")
     public ResponseEntity<Map<String, Object>> getAllBooks(@RequestParam(defaultValue = "0", required = false) Integer page,
                                                            @RequestParam(defaultValue = "10", required = false) Integer size) {
         return ResponseEntity.ok(pageConfig.response(bookService.getAllBooks(PageRequest.of(page, size))));

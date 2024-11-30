@@ -1,5 +1,7 @@
 package com.epam.rd.autocode.spring.project.security.config;
 
+import com.epam.rd.autocode.spring.project.model.Client;
+import com.epam.rd.autocode.spring.project.model.Employee;
 import com.epam.rd.autocode.spring.project.repo.ClientRepository;
 import com.epam.rd.autocode.spring.project.repo.EmployeeRepository;
 import com.epam.rd.autocode.spring.project.security.TokenProvider;
@@ -8,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
@@ -26,19 +30,18 @@ public class UserDetailsServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        UserDetails employee = employeeRepository.findEmployeeByEmail(email);
-        if (employee != null) {
-            httpServletResponse.addCookie(tokenProvider.generateAuthorizationCookie(employeeRepository.findByEmail(email).get()));
-            return employee;
-        }
-
-
-        UserDetails client = clientRepository.findClientByEmail(email);
-        if (client != null) {
-            httpServletResponse.addCookie(tokenProvider.generateAuthorizationCookie(clientRepository.findByEmail(email).get()));
-            return client;
-        }
-
-        throw new UsernameNotFoundException("User not found with email: " + email);
+        return Optional.ofNullable(employeeRepository.findEmployeeByEmail(email))
+                .or(() -> Optional.ofNullable(clientRepository.findClientByEmail(email)))
+                .map(user -> {
+                    if (user instanceof Employee) {
+                        httpServletResponse.addCookie(tokenProvider.generateAuthorizationCookie(
+                                employeeRepository.findByEmail(email).get()));
+                    } else if (user instanceof Client) {
+                        httpServletResponse.addCookie(tokenProvider.generateAuthorizationCookie(
+                                clientRepository.findByEmail(email).get()));
+                    }
+                    return user;
+                })
+                .orElseThrow(() -> new UsernameNotFoundException("No user found with email: " + email));
     }
 }

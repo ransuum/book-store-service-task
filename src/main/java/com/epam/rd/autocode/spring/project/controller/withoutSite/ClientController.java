@@ -22,7 +22,7 @@ public class ClientController {
         this.pageConfig = pageConfig;
     }
 
-    @GetMapping
+    @GetMapping("/get-all")
     public ResponseEntity<Map<String, Object>> getClients(@RequestParam(defaultValue = "0", required = false) Integer page,
                                                           @RequestParam(defaultValue = "10", required = false) Integer size) {
         return ResponseEntity.ok(pageConfig.response(clientService.getAllClients(PageRequest.of(page, size))));

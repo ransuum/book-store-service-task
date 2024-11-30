@@ -20,9 +20,11 @@ public class ClientRegister implements RegisterManager {
     @Override
     public <T extends UserReq> T register(T user) {
         ClientReq clientReq = modelMapper.map(user, ClientReq.class);
+
         clientRepository.findByEmail(clientReq.getEmail()).ifPresent(client -> {
-            throw new AlreadyExistException("Client with email " + clientReq.getEmail() + " already exist");
+            throw new AlreadyExistException("You can't use this email");
         });
+
         clientRepository.save(new Client(clientReq.getEmail(),
                 new BCryptPasswordEncoder().encode(clientReq.getPassword()),
                 clientReq.getName(), clientReq.getBalance()));
