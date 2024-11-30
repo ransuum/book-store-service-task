@@ -11,14 +11,14 @@ import java.util.Map;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
-//    @ExceptionHandler(Exception.class)
-//    public final ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {
-//        List<String> errors = List.of(ex.getMessage());
-//
-//        return ResponseEntity
-//                .status(HttpStatus.BAD_GATEWAY)
-//                .body(errorsMap(errors));
-//    }
+    @ExceptionHandler(Exception.class)
+    public final ResponseEntity<Map<String, List<String>>> handleGeneralExceptions(Exception ex) {
+        List<String> errors = List.of(ex.getMessage());
+
+        return ResponseEntity
+                .status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(errorsMap(errors));
+    }
 
     @ExceptionHandler(RuntimeException.class)
     public final ResponseEntity<Map<String, List<String>>> handleRuntimeExceptions(RuntimeException ex) {

@@ -34,13 +34,6 @@ public abstract class User implements UserDetails {
         this.name = name;
     }
 
-    public abstract String getRole();
-
-    @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority(getRole()));
-    }
-
     @Override
     public String getUsername() {
         return email;

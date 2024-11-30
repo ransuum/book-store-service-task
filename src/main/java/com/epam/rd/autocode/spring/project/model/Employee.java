@@ -32,9 +32,8 @@ public class Employee extends User {
         this.phone = phone;
     }
 
-
     @Override
-    public String getRole() {
-        return "";
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
     }
 }
