@@ -45,11 +45,12 @@ public class SecurityConfig {
                         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.POST, "/login", "/register/*", "/logout", "/books/**").permitAll()
-                                .requestMatchers(HttpMethod.PUT, "/employees/*").hasAnyRole("EMPLOYEE", "CLIENT")
+                                .requestMatchers(HttpMethod.PUT, "/employees/*").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.GET, "/clients/**", "/employees/**").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.POST, "/employees/**").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.DELETE, "/employees/*").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.POST, "/clients/**").hasRole("EMPLOYEE")
+                                .requestMatchers(HttpMethod.PUT, "/clients/**").hasAnyRole("EMPLOYEE", "CLIENTS")
                                 .anyRequest().authenticated())
                         .sessionManagement(session -> session
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
@@ -66,6 +67,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/logout", "/create").hasAnyRole("EMPLOYEE", "CLIENT")
                                 .requestMatchers(HttpMethod.POST, "/deleteBook/*", "/create-book").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.GET, "/create").hasRole("EMPLOYEE")
+                                .anyRequest().authenticated()
                         )
                         .sessionManagement(session -> session
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
