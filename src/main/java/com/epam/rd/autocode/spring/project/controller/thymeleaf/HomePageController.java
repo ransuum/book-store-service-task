@@ -20,10 +20,12 @@ public class HomePageController {
     public String viewBooksPage(
             @RequestParam(defaultValue = "0", required = false) Integer page,
             @RequestParam(defaultValue = "20", required = false) Integer size,
-            Model model
+            Model model,
+            @CookieValue(value = "Authorization", required = false) String authCookie
     ) {
         Page<BookDTO> books = bookService.getAllBooks(PageRequest.of(page, size));
         model.addAttribute("books", books);
+        model.addAttribute("authenticated", authCookie != null);
         return "home-page";
     }
 

@@ -56,14 +56,17 @@
 <div class="container">
     <h1>Edit Client Profile</h1>
     <form id="clientProfileForm">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email">
+
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password">
 
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" >
 
         <label for="balance">Balance:</label>
-        <input type="number" id="balance" name="balance" step="0.01" required>
+        <input type="number" id="balance" name="balance" step="0.01">
 
         <button type="submit">Save Changes</button>
     </form>

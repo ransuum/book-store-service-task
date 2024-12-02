@@ -6,6 +6,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -33,6 +34,12 @@ public class RegistrationController {
     @PostMapping("/sign-in")
     public String signIn(@ModelAttribute LoginRequest loginReq, HttpServletRequest request, HttpServletResponse response) {
         authService.login(loginReq, authenticationManager);
+        return "redirect:/home";
+    }
+
+    @GetMapping("/sign-out/acc")
+    public String logout(HttpServletResponse response) {
+        authService.logout(response);
         return "redirect:/home";
     }
 }
