@@ -2,8 +2,7 @@ package com.epam.rd.autocode.spring.project.controller.withoutSite;
 
 import com.epam.rd.autocode.spring.project.model.enums.AuthoritiesType;
 import com.epam.rd.autocode.spring.project.model.request.login.LoginRequest;
-import com.epam.rd.autocode.spring.project.model.request.register.ClientReq;
-import com.epam.rd.autocode.spring.project.model.request.register.EmployeeReq;
+import com.epam.rd.autocode.spring.project.model.request.register.UserReq;
 import com.epam.rd.autocode.spring.project.service.AuthService;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.Valid;
@@ -24,14 +23,9 @@ public class AuthController {
         this.authenticationManager = authenticationManager;
     }
 
-    @PostMapping("/register/employee")
-    public ResponseEntity<EmployeeReq> registerEmployee(@RequestBody @Valid EmployeeReq employeeReq) {
-        return ResponseEntity.ok(authService.register(employeeReq, AuthoritiesType.EMPLOYEE));
-    }
-
-    @PostMapping("/register/client")
-    public ResponseEntity<ClientReq> registerClient(@RequestBody ClientReq clientReq) {
-        return ResponseEntity.ok(authService.register(clientReq, AuthoritiesType.CLIENT));
+    @PostMapping("/register/acc")
+    public ResponseEntity<UserReq> registerEmployee(@RequestParam AuthoritiesType authoritiesType, @RequestBody @Valid UserReq userReq) {
+        return ResponseEntity.ok(authService.register(userReq, authoritiesType));
     }
 
     @PostMapping("/login")
