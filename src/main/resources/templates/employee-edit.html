@@ -55,7 +55,7 @@
 <body>
 <div class="container">
     <h1>Edit Employee Profile</h1>
-    <form th:action="@{/edit/acc}" method="post" id="employeeProfileForm" th:object="${updateRequest}">
+    <form th:action="@{/edit/employee}" method="post" id="employeeProfileForm" th:object="${employee}">
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" th:field="*{password}">
 

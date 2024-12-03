@@ -2,13 +2,12 @@ package com.epam.rd.autocode.spring.project.util.edit_manager;
 
 import com.epam.rd.autocode.spring.project.model.enums.AuthoritiesType;
 import com.epam.rd.autocode.spring.project.model.request.edit.EmployeeUpdateRequest;
-import com.epam.rd.autocode.spring.project.model.request.edit.UserUpdateRequest;
 import com.epam.rd.autocode.spring.project.repo.EmployeeRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Component;
 
 @Component
-public class EditEmployee implements Edit {
+public class EditEmployee implements Edit<EmployeeUpdateRequest> {
     private final EmployeeRepository employeeRepository;
 
     public EditEmployee(EmployeeRepository employeeRepository) {
@@ -16,8 +15,7 @@ public class EditEmployee implements Edit {
     }
 
     @Override
-    public <T extends UserUpdateRequest> T edit(T t) {
-        EmployeeUpdateRequest employeeUpdateRequest = (EmployeeUpdateRequest) t;
+    public EmployeeUpdateRequest edit(EmployeeUpdateRequest employeeUpdateRequest) {
         employeeRepository.findByEmail(employeeUpdateRequest.getEmail()).ifPresent(employee -> {
             if (employeeUpdateRequest.getBirthdate() != null) employee.setBirthDate(employeeUpdateRequest.getBirthdate());
             if (employeeUpdateRequest.getPhone() != null) employee.setPhone(employeeUpdateRequest.getPhone());
@@ -26,7 +24,7 @@ public class EditEmployee implements Edit {
                 employee.setPassword(new BCryptPasswordEncoder().encode(employeeUpdateRequest.getPassword()));
             employeeRepository.save(employee);
         });
-        return (T) employeeUpdateRequest;
+        return employeeUpdateRequest;
     }
 
     @Override

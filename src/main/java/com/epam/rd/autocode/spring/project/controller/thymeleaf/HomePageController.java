@@ -3,7 +3,6 @@ package com.epam.rd.autocode.spring.project.controller.thymeleaf;
 import com.epam.rd.autocode.spring.project.dto.BookDTO;
 import com.epam.rd.autocode.spring.project.model.request.edit.ClientUpdateRequest;
 import com.epam.rd.autocode.spring.project.model.request.edit.EmployeeUpdateRequest;
-import com.epam.rd.autocode.spring.project.model.request.edit.UserUpdateRequest;
 import com.epam.rd.autocode.spring.project.service.BookService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -59,17 +58,13 @@ public class HomePageController {
                 .map(GrantedAuthority::getAuthority)
                 .collect(Collectors.toList());
 
-
         log.info("roles: {}", roles);
         if (roles.contains("ROLE_EMPLOYEE")) {
-            model.addAttribute("role", "EMPLOYEE");
-            model.addAttribute("updateRequest", new EmployeeUpdateRequest());
+            model.addAttribute("employee", new EmployeeUpdateRequest());
             return "employee-edit";
-        }  else {
-            model.addAttribute("role", "CLIENT");
-            model.addAttribute("updateRequest", new ClientUpdateRequest());
+        } else {
+            model.addAttribute("client", new ClientUpdateRequest());
             return "client-edit";
         }
     }
-
 }
