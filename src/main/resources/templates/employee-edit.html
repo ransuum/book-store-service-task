@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,28 +55,21 @@
 <body>
 <div class="container">
     <h1>Edit Employee Profile</h1>
-    <form id="employeeProfileForm">
+    <form th:action="@{/edit/acc}" method="post" id="employeeProfileForm" th:object="${updateRequest}">
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
+        <input type="password" id="password" name="password" th:field="*{password}">
 
         <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
+        <input type="text" id="name" name="name" th:field="*{name}">
 
         <label for="birthDate">Birth Date:</label>
-        <input type="date" id="birthDate" name="birthDate" required>
+        <input type="date" id="birthDate" name="birthDate" th:field="*{birthdate}">
 
         <label for="phone">Phone:</label>
-        <input type="tel" id="phone" name="phone" required>
+        <input type="tel" id="phone" name="phone" th:field="*{phone}">
 
         <button type="submit">Save Changes</button>
     </form>
 </div>
-
-<script>
-    document.getElementById('employeeProfileForm').addEventListener('submit', function(e) {
-        e.preventDefault();
-        console.log('Form submitted');
-    });
-</script>
 </body>
 </html>

@@ -1,0 +1,15 @@
+package com.epam.rd.autocode.spring.project.model.request.edit;
+
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+
+import java.math.BigDecimal;
+
+@AllArgsConstructor
+@NoArgsConstructor
+public class ClientUpdateRequest extends UserUpdateRequest {
+    private String email;
+    private String password;
+    private String name;
+    private BigDecimal balance;
+}

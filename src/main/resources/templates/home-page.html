@@ -272,12 +272,17 @@
             <li th:if="${!authenticated}">
                 <a th:href="@{/login}" th:method="post">Sign in</a>
             </li>
+
             <li th:if="${!authenticated}">
                 <a th:href="@{/register}" th:method="post">Sign Up</a>
             </li>
 
             <li th:if="${authenticated}">
                 <a th:href="@{/sign-out/acc}" th:method="get">Logout</a>
+            </li>
+
+            <li th:if="${authenticated}">
+                <a th:href="@{/edit/page}" th:method="get">Edit Profile</a>
             </li>
         </ul>
     </nav>
