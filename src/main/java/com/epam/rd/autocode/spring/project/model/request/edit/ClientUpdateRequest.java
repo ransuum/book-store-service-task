@@ -18,6 +18,6 @@ public class ClientUpdateRequest implements UserUpdateRequest {
 
     @Override
     public AuthoritiesType getAuthoritiesType() {
-        return null;
+        return AuthoritiesType.CLIENT;
     }
 }

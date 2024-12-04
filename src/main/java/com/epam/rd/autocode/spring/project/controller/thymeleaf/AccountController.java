@@ -4,11 +4,12 @@ import com.epam.rd.autocode.spring.project.model.request.edit.ClientUpdateReques
 import com.epam.rd.autocode.spring.project.model.request.edit.EmployeeUpdateRequest;
 import com.epam.rd.autocode.spring.project.model.request.login.LoginRequest;
 import com.epam.rd.autocode.spring.project.service.AuthService;
-import com.epam.rd.autocode.spring.project.service.impl.EditProfileService;
+import com.epam.rd.autocode.spring.project.util.edit_manager.config.EditConfig;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,12 +19,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 public class AccountController {
     private final AuthService authService;
     private final AuthenticationManager authenticationManager;
-    private final EditProfileService editProfileService;
+    private final EditConfig editConfig;
 
-    public AccountController(AuthService authService, AuthenticationManager authenticationManager, EditProfileService editProfileService) {
+    public AccountController(AuthService authService, AuthenticationManager authenticationManager, EditConfig editConfig) {
         this.authService = authService;
         this.authenticationManager = authenticationManager;
-        this.editProfileService = editProfileService;
+        this.editConfig = editConfig;
     }
 
     @GetMapping("/login")
@@ -47,17 +48,4 @@ public class AccountController {
         authService.logout(response);
         return "redirect:/home";
     }
-
-    @PostMapping("/edit/employee")
-    public String employee(@ModelAttribute("employee") EmployeeUpdateRequest employeeUpdateRequest) {
-        editProfileService.editProfileEmployee(employeeUpdateRequest);
-        return "redirect:/home";
-    }
-
-    @PostMapping("/edit/client")
-    public String client(@ModelAttribute("client") ClientUpdateRequest clientUpdateRequest) {
-        editProfileService.editProfileClient(clientUpdateRequest);
-        return "redirect:/home";
-    }
-
 }

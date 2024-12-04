@@ -1,9 +1,9 @@
 package com.epam.rd.autocode.spring.project.controller.thymeleaf;
 
 import com.epam.rd.autocode.spring.project.dto.BookDTO;
-import com.epam.rd.autocode.spring.project.model.request.edit.ClientUpdateRequest;
-import com.epam.rd.autocode.spring.project.model.request.edit.EmployeeUpdateRequest;
 import com.epam.rd.autocode.spring.project.service.BookService;
+import com.epam.rd.autocode.spring.project.service.ClientService;
+import com.epam.rd.autocode.spring.project.service.EmployeeService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -21,9 +21,13 @@ import java.util.stream.Collectors;
 @Slf4j
 public class HomePageController {
     private final BookService bookService;
+    private final ClientService clientService;
+    private final EmployeeService employeeService;
 
-    public HomePageController(BookService bookService) {
+    public HomePageController(BookService bookService, ClientService clientService, EmployeeService employeeService) {
         this.bookService = bookService;
+        this.clientService = clientService;
+        this.employeeService = employeeService;
     }
 
     @GetMapping("/home")
@@ -51,7 +55,7 @@ public class HomePageController {
         return "create";
     }
 
-    @GetMapping("/edit/page")
+    @GetMapping("/show/profile")
     public String editPage(Model model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         List<String> roles = authentication.getAuthorities().stream()
@@ -60,11 +64,11 @@ public class HomePageController {
 
         log.info("roles: {}", roles);
         if (roles.contains("ROLE_EMPLOYEE")) {
-            model.addAttribute("employee", new EmployeeUpdateRequest());
-            return "employee-edit";
+            model.addAttribute("employee", employeeService.getEmployeeByEmail(authentication.getName()));
+            return "employee-profile";
         } else {
-            model.addAttribute("client", new ClientUpdateRequest());
-            return "client-edit";
+            model.addAttribute("client", clientService.getClientByEmail(authentication.getName()));
+            return "client-profile";
         }
     }
 }

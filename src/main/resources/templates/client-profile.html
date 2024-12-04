@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+</body>
+</html><!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Profile</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+        header {
+            background: #2ecc71;
+            color: #ffffff;
+            padding-top: 30px;
+            min-height: 70px;
+            border-bottom: #27ae60 3px solid;
+        }
+        header h1 {
+            margin: 0;
+            text-align: center;
+            padding-bottom: 20px;
+        }
+        .profile-card {
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 5px;
+        }
+        .profile-card h2 {
+            color: #2ecc71;
+            border-bottom: 2px solid #2ecc71;
+            padding-bottom: 10px;
+        }
+        .profile-info {
+            margin-top: 20px;
+        }
+        .profile-info p {
+            margin: 10px 0;
+        }
+        .label {
+            font-weight: bold;
+            display: inline-block;
+            width: 100px;
+        }
+        .balance {
+            font-size: 1.2em;
+            color: #2ecc71;
+        }
+        footer {
+            background: #2ecc71;
+            color: #ffffff;
+            text-align: center;
+            padding: 10px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+        }
+        @media(max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+        }
+    </style>
+</head>
+<body>
+<header>
+    <div class="container">
+        <h1>Client Profile</h1>
+    </div>
+</header>
+
+<div class="container">
+    <div class="profile-card">
+        <h2>Personal Information <a th:href="@{/edit/client}">Edit</a></h2>
+        <div class="profile-info" th:object="${client}">
+            <p th:field="*{name}"><span class="label">Name:</span></p>
+            <p th:field="*{email}"><span class="label">Email:</span></p>
+            <p th:field="*{balance}"><span class="label">Balance:</span> <span class="balance"></span>$</p>
+        </div>
+    </div>
+</div>
+
+<footer>
+    <p>&copy; 2023 Company Name. All rights reserved.</p>
+</footer>
+</body>
+</html>
