@@ -3,6 +3,8 @@ package com.epam.rd.autocode.spring.project.controller.thymeleaf;
 import com.epam.rd.autocode.spring.project.model.Employee;
 import com.epam.rd.autocode.spring.project.model.request.edit.EmployeeUpdateRequest;
 import com.epam.rd.autocode.spring.project.util.edit_manager.config.EditConfig;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,7 +29,8 @@ public class EmployeeEditController {
 
     @PostMapping("/edit")
     public String employee(@ModelAttribute("employee") EmployeeUpdateRequest employeeUpdateRequest) {
-        editConfig.employeeUpdate().edit(employeeUpdateRequest);
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        editConfig.employeeUpdate().edit(authentication.getName(), employeeUpdateRequest);
         return "redirect:/home";
     }
 }

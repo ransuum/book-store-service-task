@@ -55,7 +55,7 @@
 <body>
 <div class="container">
     <h1>Edit Client Profile</h1>
-    <form id="clientProfileForm" th:method="post" th:action="@{/edit/client}" th:object="${client}">
+    <form id="clientProfileForm" th:method="post" th:action="@{/client/edit}" th:object="${client}">
         <label for="email">Email:</label>
         <input type="email" id="email" name="email" th:field="*{email}">
 

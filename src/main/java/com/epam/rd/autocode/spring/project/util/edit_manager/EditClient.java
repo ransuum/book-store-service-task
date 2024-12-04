@@ -15,8 +15,8 @@ public class EditClient implements Edit<ClientUpdateRequest> {
     }
 
     @Override
-    public ClientUpdateRequest edit(ClientUpdateRequest clientUpdateRequest) {
-        clientRepository.findByEmail(clientUpdateRequest.getEmail()).ifPresent(client -> {
+    public ClientUpdateRequest edit(String email, ClientUpdateRequest clientUpdateRequest) {
+        clientRepository.findByEmail(email).ifPresent(client -> {
             if (clientUpdateRequest.getEmail() != null) client.setEmail(clientUpdateRequest.getEmail());
             if (clientUpdateRequest.getPassword() != null)
                 client.setPassword(new BCryptPasswordEncoder().encode(clientUpdateRequest.getPassword()));

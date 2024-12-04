@@ -1,6 +1,7 @@
 package com.epam.rd.autocode.spring.project.controller.thymeleaf;
 
 import com.epam.rd.autocode.spring.project.dto.BookDTO;
+import com.epam.rd.autocode.spring.project.dto.EmployeeDTO;
 import com.epam.rd.autocode.spring.project.service.BookService;
 import com.epam.rd.autocode.spring.project.service.ClientService;
 import com.epam.rd.autocode.spring.project.service.EmployeeService;
@@ -64,7 +65,9 @@ public class HomePageController {
 
         log.info("roles: {}", roles);
         if (roles.contains("ROLE_EMPLOYEE")) {
-            model.addAttribute("employee", employeeService.getEmployeeByEmail(authentication.getName()));
+            EmployeeDTO employeeDTO = employeeService.getEmployeeByEmail(authentication.getName());
+            model.addAttribute("employee", employeeDTO);
+            log.info("Employee: {}", employeeDTO);
             return "employee-profile";
         } else {
             model.addAttribute("client", clientService.getClientByEmail(authentication.getName()));

@@ -64,9 +64,11 @@ public class SecurityConfig {
                         .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.GET, "/home", "/register", "/login").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/sign-in").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/logout", "/create", "/edit/acc").hasAnyRole("EMPLOYEE", "CLIENT")
-                                .requestMatchers(HttpMethod.POST, "/deleteBook/*", "/create-book").hasRole("EMPLOYEE")
-                                .requestMatchers(HttpMethod.GET, "/create").hasRole("EMPLOYEE")
+                                .requestMatchers(HttpMethod.POST, "/logout", "/create", "/edit/acc", "/client/*").hasAnyRole("EMPLOYEE", "CLIENT")
+                                .requestMatchers(HttpMethod.POST, "/deleteBook/*", "/create-book", "/employee/*").hasRole("EMPLOYEE")
+                                .requestMatchers(HttpMethod.GET, "/show/profile").authenticated()
+                                .requestMatchers(HttpMethod.GET, "/create", "/employee/*").hasRole("EMPLOYEE")
+                                .requestMatchers(HttpMethod.GET, "/client/*").hasAnyRole("CLIENT", "EMPLOYEE")
                                 .anyRequest().authenticated()
                         )
                         .sessionManagement(session -> session

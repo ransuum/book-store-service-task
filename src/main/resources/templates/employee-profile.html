@@ -79,12 +79,12 @@
 
 <div class="container">
     <div class="profile-card">
-        <h2>Personal Information <a th:href="@{/edit/employee}">Edit</a></h2>
+        <h2>Personal Information <a th:href="@{/employee/form}">Edit</a></h2>
         <div class="profile-info" th:object="${employee}">
-            <p th:field="*{name}"><span class="label">Name:</span></p>
-            <p th:field="*{email}"><span class="label">Email:</span></p>
-            <p th:field="*{birthDate}"><span class="label">Birthdate:</span></p>
-            <p th:field="*{phone}"><span class="label">Phone:</span></p>
+            <p th:text="|Name: *{name}|"><span class="label">Name:</span></p>
+            <p th:text="|Email: *{email}|"><span class="label">Email:</span></p>
+            <p th:text="|BirthDate: *{birthDate}|"><span class="label">Birthdate:</span></p>
+            <p th:text="|Phone: *{phone}|"><span class="label">Phone:</span></p>
         </div>
     </div>
 </div>

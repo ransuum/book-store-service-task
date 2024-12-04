@@ -1,5 +1,6 @@
 package com.epam.rd.autocode.spring.project.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -18,7 +19,8 @@ public class ClientDTO {
     private String email;
 
     @NotBlank(message = "Password cannot be blank")
-    @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
+    @Size(min = 4, max = 20, message = "Password must be between 8 and 20 characters")
+    @JsonIgnore
     private String password;
 
     @NotBlank(message = "Name cannot be blank")

@@ -4,6 +4,6 @@ import com.epam.rd.autocode.spring.project.model.enums.AuthoritiesType;
 import com.epam.rd.autocode.spring.project.model.request.edit.UserUpdateRequest;
 
 public interface Edit<T extends UserUpdateRequest> {
-    T edit(T userUpdateRequest);
+    T edit(String email, T userUpdateRequest);
     AuthoritiesType getAuthoritiesType();
 }
