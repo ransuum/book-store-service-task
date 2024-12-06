@@ -28,6 +28,6 @@ public class ClientDTO {
     private String name;
 
     @NotNull(message = "Balance is required")
-    @DecimalMin(value = "0.0", inclusive = true, message = "Balance cannot be negative")
+    @DecimalMin(value = "0.0", message = "Balance cannot be negative")
     private BigDecimal balance;
 }

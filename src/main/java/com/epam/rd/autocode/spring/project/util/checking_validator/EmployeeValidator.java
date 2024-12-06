@@ -22,7 +22,7 @@ public class EmployeeValidator implements Validator<Employee, EmployeeDTO> {
                     if (!o2.getPhone().equals(o1.getPhone())) o1.setPhone(o2.getPhone());
                 },
                 () -> {
-                    if (!o2.getBirthDate().equals(o1.getBirthDate())) o1.setBirthDate(o2.getBirthDate());
+                    if (!o2.getBirthdate().equals(o1.getBirthDate())) o1.setBirthDate(o2.getBirthdate());
                 }
         );
 

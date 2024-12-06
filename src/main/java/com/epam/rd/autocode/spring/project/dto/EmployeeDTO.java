@@ -36,5 +36,5 @@ public class EmployeeDTO {
 
     @NotNull(message = "Birth date is required")
     @Past(message = "Birth date must be in the past")
-    private LocalDate birthDate;
+    private LocalDate birthdate;
 }
