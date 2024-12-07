@@ -1,6 +1,5 @@
 package com.epam.rd.autocode.spring.project.util.edit_manager;
 
-import com.epam.rd.autocode.spring.project.model.enums.AuthoritiesType;
 import com.epam.rd.autocode.spring.project.model.request.edit.ClientUpdateRequest;
 import com.epam.rd.autocode.spring.project.repo.ClientRepository;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,10 +24,5 @@ public class EditClient implements Edit<ClientUpdateRequest> {
         });
 
         return clientUpdateRequest;
-    }
-
-    @Override
-    public AuthoritiesType getAuthoritiesType() {
-        return AuthoritiesType.CLIENT;
     }
 }

@@ -5,5 +5,4 @@ import com.epam.rd.autocode.spring.project.model.request.edit.UserUpdateRequest;
 
 public interface Edit<T extends UserUpdateRequest> {
     T edit(String email, T userUpdateRequest);
-    AuthoritiesType getAuthoritiesType();
 }

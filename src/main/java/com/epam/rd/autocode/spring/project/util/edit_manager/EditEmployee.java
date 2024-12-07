@@ -1,6 +1,5 @@
 package com.epam.rd.autocode.spring.project.util.edit_manager;
 
-import com.epam.rd.autocode.spring.project.model.enums.AuthoritiesType;
 import com.epam.rd.autocode.spring.project.model.request.edit.EmployeeUpdateRequest;
 import com.epam.rd.autocode.spring.project.repo.EmployeeRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -28,10 +27,5 @@ public class EditEmployee implements Edit<EmployeeUpdateRequest> {
 
         });
         return employeeUpdateRequest;
-    }
-
-    @Override
-    public AuthoritiesType getAuthoritiesType() {
-        return AuthoritiesType.EMPLOYEE;
     }
 }

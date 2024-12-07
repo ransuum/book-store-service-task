@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Информация о клиентах</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            margin: auto;
+            overflow: hidden;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .client-list {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .client-card {
+            background: #fff;
+            border-radius: 5px;
+            padding: 20px;
+            margin-bottom: 20px;
+            width: calc(33.33% - 20px);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .client-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .client-card h2 {
+            color: #2c3e50;
+            margin-top: 0;
+        }
+
+        .client-card p {
+            margin: 10px 0;
+            color: #34495e;
+        }
+
+        @media (max-width: 768px) {
+            .client-card {
+                width: calc(50% - 20px);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .client-card {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Информация о клиентах</h1>
+    <div class="client-list">
+        <div class="client-card">
+            <h2>Иван Иванов</h2>
+            <p><strong>Email:</strong> ivan@example.com</p>
+            <p><strong>Баланс:</strong> 342342342</p>
+        </div>
+        <div class="client-card">
+            <h2>Мария Петрова</h2>
+            <p><strong>Email:</strong> maria@example.com</p>
+            <p><strong>Баланс:</strong> 1432432432432</p>
+        </div>
+        <div class="client-card">
+            <h2>Алексей Сидоров</h2>
+            <p><strong>Email:</strong> alexey@example.com</p>
+            <p><strong>Баланс:</strong> 7432432</p>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
