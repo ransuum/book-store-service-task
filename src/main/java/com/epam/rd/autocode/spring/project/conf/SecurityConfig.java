@@ -67,7 +67,7 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/logout", "/create", "/edit/acc", "/client/*").hasAnyRole("EMPLOYEE", "CLIENT")
                                 .requestMatchers(HttpMethod.POST, "/deleteBook/*", "/create-book", "/employee/*").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.GET, "/show/profile").authenticated()
-                                .requestMatchers(HttpMethod.GET, "/create", "/employee/*").hasRole("EMPLOYEE")
+                                .requestMatchers(HttpMethod.GET, "/create", "/employee/profile","/list/*").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.GET, "/client/*").hasAnyRole("CLIENT", "EMPLOYEE")
                                 .anyRequest().authenticated()
                         )

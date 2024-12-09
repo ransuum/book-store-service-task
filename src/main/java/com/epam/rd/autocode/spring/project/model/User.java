@@ -34,6 +34,13 @@ public abstract class User implements UserDetails {
         this.name = name;
     }
 
+    public User(Long id, String email, String password, String name) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.name = name;
+    }
+
     @Override
     public String getUsername() {
         return email;

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -72,22 +72,15 @@
 </head>
 <body>
 <div class="container">
-    <h1>Информация о клиентах</h1>
-    <div class="client-list">
-        <div class="client-card">
-            <h2>Иван Иванов</h2>
-            <p><strong>Email:</strong> ivan@example.com</p>
-            <p><strong>Баланс:</strong> 342342342</p>
-        </div>
-        <div class="client-card">
-            <h2>Мария Петрова</h2>
-            <p><strong>Email:</strong> maria@example.com</p>
-            <p><strong>Баланс:</strong> 1432432432432</p>
-        </div>
-        <div class="client-card">
-            <h2>Алексей Сидоров</h2>
-            <p><strong>Email:</strong> alexey@example.com</p>
-            <p><strong>Баланс:</strong> 7432432</p>
+    <h1>Information about clients</h1>
+    <div th:each="client : ${client}" class="client-list">
+        <div  class="client-card">
+            <h2 th:text="'Name: ' + ${client.name}">Ivan Ivanov</h2>
+            <p th:text="'Email: ' + ${client.email}"> ivan@example.com</p>
+            <p th:text="'Balance: ' + ${client.balance}"><strong>Balance:</strong> 342342342</p>
+            <form th:action="@{/list/delete-client/{name}(name=${client.email})}" th:method="post">
+                <button type="submit" class="delete-button">Delete Client</button>
+            </form>
         </div>
     </div>
 </div>

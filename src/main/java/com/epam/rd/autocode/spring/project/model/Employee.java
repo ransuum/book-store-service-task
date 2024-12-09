@@ -32,6 +32,12 @@ public class Employee extends User {
         this.phone = phone;
     }
 
+    public Employee(Long id, String email, String password, String name, LocalDate birthDate, String phone) {
+        super(id, email, password, name);
+        this.birthDate = birthDate;
+        this.phone = phone;
+    }
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority("ROLE_EMPLOYEE"));
