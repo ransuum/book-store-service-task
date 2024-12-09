@@ -94,9 +94,9 @@
     <div class="profile-card">
         <h2>Personal Information <a th:href="@{/client/form}">Edit</a></h2>
         <div class="profile-info" th:object="${client}">
-            <p th:field="*{name}"><span class="label">Name:</span></p>
-            <p th:field="*{email}"><span class="label">Email:</span></p>
-            <p th:field="*{balance}"><span class="label">Balance:</span> <span class="balance"></span>$</p>
+            <p th:text="|Name: *{name}|"><span class="label">Name:</span></p>
+            <p th:text="|Email: *{email}|"><span class="label">Email:</span></p>
+            <p th:text="|Balance: *{balance}|"><span class="label">Balance:</span> <span class="balance"></span>$</p>
         </div>
     </div>
 </div>

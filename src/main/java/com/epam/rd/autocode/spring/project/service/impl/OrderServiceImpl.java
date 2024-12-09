@@ -43,7 +43,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderDTO addOrder(OrderDTO order) {
-        return modelMapper.map(Order.builder()
+        return modelMapper.map(orderRepository.save(Order.builder()
                 .orderDate(order.getOrderDate())
                 .price(order.getPrice())
                 .client(clientRepository.findByEmail(order.getClientEmail())
@@ -52,6 +52,6 @@ public class OrderServiceImpl implements OrderService {
                 .employee(employeeRepository.findByEmail(order.getEmployeeEmail())
                         .orElseThrow(()
                                 -> new NotFoundException("Not found employee with email " + order.getEmployeeEmail())))
-                .build(), OrderDTO.class);
+                .build()), OrderDTO.class);
     }
 }

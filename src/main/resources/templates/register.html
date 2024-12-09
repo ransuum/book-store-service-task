@@ -1,137 +1,142 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Register</title>
-  <style>
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      margin: 0;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    .container {
-      background-color: rgba(255, 255, 255, 0.9);
-      padding: 2rem;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-      width: 100%;
-      max-width: 400px;
-    }
-    h2 {
-      color: #4a5568;
-      text-align: center;
-      margin-bottom: 1.5rem;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-    }
-    input, select {
-      margin-bottom: 1rem;
-      padding: 0.75rem;
-      border: 1px solid #e2e8f0;
-      border-radius: 5px;
-      font-size: 1rem;
-      transition: border-color 0.3s ease;
-    }
-    input:focus, select:focus {
-      outline: none;
-      border-color: #667eea;
-    }
-    button {
-      background-color: #667eea;
-      color: white;
-      padding: 0.75rem;
-      border: none;
-      border-radius: 5px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background-color 0.3s ease;
-    }
-    button:hover {
-      background-color: #5a67d8;
-    }
-    .login-link {
-      text-align: center;
-      margin-top: 1rem;
-      color: #4a5568;
-    }
-    .login-link a {
-      color: #667eea;
-      text-decoration: none;
-    }
-    .login-link a:hover {
-      text-decoration: underline;
-    }
-    .home-button {
-      display: block;
-      width: 100%;
-      text-align: center;
-      margin-top: 1rem;
-      padding: 0.75rem;
-      background-color: #4a5568;
-      color: white;
-      text-decoration: none;
-      border-radius: 5px;
-      transition: background-color 0.3s ease;
-    }
-    .home-button:hover {
-      background-color: #2d3748;
-    }
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+
+        .container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        h2 {
+            color: #4a5568;
+            text-align: center;
+            margin-bottom: 1.5rem;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        input, select {
+            margin-bottom: 1rem;
+            padding: 0.75rem;
+            border: 1px solid #e2e8f0;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus, select:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        button {
+            background-color: #667eea;
+            color: white;
+            padding: 0.75rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #5a67d8;
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1rem;
+            color: #4a5568;
+        }
+
+        .login-link a {
+            color: #667eea;
+            text-decoration: none;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .home-button {
+            display: block;
+            width: 100%;
+            text-align: center;
+            margin-top: 1rem;
+            padding: 0.75rem;
+            background-color: #4a5568;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        .home-button:hover {
+            background-color: #2d3748;
+        }
+    </style>
 </head>
 <body>
 <div class="container">
-  <h2>Create an Account</h2>
-  <form action="#" method="post">
-    <select id="userType" name="userType" onchange="toggleFields()">
-      <option value="">Select user type</option>
-      <option value="employee">Employee</option>
-      <option value="client">Client</option>
+    <h2>Create an Account</h2>
+    <select id="userType" name="userType" onchange="toggleForms()">
+        <option value="">Select user type</option>
+        <option value="employee">Employee</option>
+        <option value="client">Client</option>
     </select>
-    <div id="employeeFields" style="display: none;">
-      <input type="text" name="name" placeholder="Name" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <input type="date" name="birthDate" placeholder="Birth Date" required>
-      <input type="tel" name="phone" placeholder="Phone" required>
+
+    <form id="employeeForm" th:action="@{/thyme/register/employee}" method="post" th:object="${employeeReq}" style="display:none;">
+        <input type="text" th:field="*{name}" placeholder="Name" required>
+        <input type="email" th:field="*{email}" placeholder="Email" required>
+        <input type="password" th:field="*{password}" placeholder="Password" required>
+        <input type="date" th:field="*{birthdate}" placeholder="Birth Date" required>
+        <input type="tel" th:field="*{phone}" placeholder="Phone" required>
+        <button type="submit">Register Employee</button>
+    </form>
+
+    <form id="clientForm" th:action="@{/thyme/register/client}" method="post" th:object="${clientReq}" style="display:none;">
+        <input type="text" th:field="*{name}" placeholder="Name" required>
+        <input type="email" th:field="*{email}" placeholder="Email" required>
+        <input type="password" th:field="*{password}" placeholder="Password" required>
+        <input type="number" th:field="*{balance}" placeholder="Balance" step="0.01" required>
+        <button type="submit">Register Client</button>
+    </form>
+    <div class="login-link">
+        Already have an account? <a th:href="@{/login}">Login</a>
     </div>
-    <div id="clientFields" style="display: none;">
-      <input type="text" name="name" placeholder="Name" required>
-      <input type="email" name="email" placeholder="Email" required>
-      <input type="password" name="password" placeholder="Password" required>
-      <input type="number" name="balance" placeholder="Balance" step="0.01" required>
-    </div>
-    <button type="submit">Register</button>
-  </form>
-  <div class="login-link">
-    Already have an account? <a th:href="@{/login}">Login</a>
-  </div>
-  <a th:href="@{/home}" class="home-button">Return to Home</a>
+    <a th:href="@{/home}" class="home-button">Return to Home</a>
 </div>
 
 <script>
-  function toggleFields() {
-    const userType = document.getElementById('userType').value;
-    const employeeFields = document.getElementById('employeeFields');
-    const clientFields = document.getElementById('clientFields');
+    function toggleForms() {
+        const userType = document.getElementById('userType').value;
+        const employeeForm = document.getElementById('employeeForm');
+        const clientForm = document.getElementById('clientForm');
 
-    if (userType === 'employee') {
-      employeeFields.style.display = 'block';
-      clientFields.style.display = 'none';
-    } else if (userType === 'client') {
-      employeeFields.style.display = 'none';
-      clientFields.style.display = 'block';
-    } else {
-      employeeFields.style.display = 'none';
-      clientFields.style.display = 'none';
+        employeeForm.style.display = userType === 'employee' ? 'block' : 'none';
+        clientForm.style.display = userType === 'client' ? 'block' : 'none';
     }
-  }
 </script>
 </body>
 </html>

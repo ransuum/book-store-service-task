@@ -10,9 +10,7 @@ import com.epam.rd.autocode.spring.project.util.checking_validator.Validator;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
-//import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService {

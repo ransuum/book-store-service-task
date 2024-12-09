@@ -269,31 +269,18 @@
             <li><a href="#books">Books</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
-            <li th:if="${!authenticated}">
-                <a th:href="@{/login}" th:method="post">Sign in</a>
-            </li>
-
-            <li th:if="${!authenticated}">
-                <a th:href="@{/register}" th:method="post">Sign Up</a>
-            </li>
-
-            <li th:if="${authenticated}">
-                <a th:href="@{/sign-out/acc}" th:method="get">Logout</a>
-            </li>
-
-            <li th:if="${authenticated}">
-                <a th:href="@{/show/profile}" th:method="get">Profile</a>
-            </li>
+            <li th:if="${!authenticated}"><a th:href="@{/login}" th:method="post">Sign in</a></li>
+            <li th:if="${!authenticated}"><a th:href="@{/register}" th:method="post">Sign Up</a></li>
+            <li th:if="${authenticated}"><a th:href="@{/sign-out/acc}" th:method="get">Logout</a></li>
+            <li th:if="${authenticated}"><a th:href="@{/show/profile}" th:method="get">Profile</a></li>
         </ul>
     </nav>
 </header>
-
 <main>
     <section class="hero" id="home">
-        <div class="hero-content">
-            <h1>Welcome to Bookworm's Haven</h1>
-            <p>Discover your next favorite book in our curated collection</p>
-            <a href="#books" class="cta-button">Explore Books</a>
+        <div class="hero-content"><h1>Welcome to Bookworm's Haven</h1>
+            <p>Discover your next favorite book in our curated collection</p> <a href="#books" class="cta-button">Explore
+                Books</a>
             <form th:action="@{/create}" method="get">
                 <button type="submit" class="create-button">Create Book</button>
             </form>
@@ -302,13 +289,10 @@
             </form>
         </div>
     </section>
-
-    <section class="featured-books container" id="books">
-        <h2>Featured Books</h2>
+    <section class="featured-books container" id="books"><h2>Featured Books</h2>
         <div class="book-grid">
             <div th:each="book : ${books}" class="book-card">
-                <div class="book-info">
-                    <h3 th:text="${book.name}">Book Name</h3>
+                <div class="book-info"><h3 th:text="${book.name}">Book Name</h3>
                     <p th:text="'By ' + ${book.author}">Author Name</p>
                     <p th:text="'Genre: ' + ${book.genre}">Genre</p>
                     <p th:text="'Language: ' + ${book.language}">Language</p>
@@ -323,18 +307,25 @@
                 </div>
             </div>
         </div>
+        <div class="pagination">
+            <ul>
+                <li th:if="${currentPage > 0}"><a th:href="@{/home(page=${currentPage - 1}, size=${books.size})}">Previous</a>
+                </li>
+                <li th:each="pageNum : ${#numbers.sequence(0, totalPages - 1)}">
+                    <a th:href="@{/home(page=${pageNum}, size=${books.size})}" th:text="${pageNum + 1}"
+                        th:classappend="${pageNum == currentPage} ? 'active' : ''">1</a></li>
+                <li th:if="${currentPage < totalPages - 1}"><a
+                        th:href="@{/home(page=${currentPage + 1}, size=${books.size})}">Next</a></li>
+            </ul>
+        </div>
     </section>
 </main>
-
 <footer>
     <div class="container">
         <div class="footer-content">
-            <div class="footer-section">
-                <h3>About Us</h3>
-                <p>Bookworm's Haven is your go-to place for the best selection of books across all genres.</p>
-            </div>
-            <div class="footer-section">
-                <h3>Quick Links</h3>
+            <div class="footer-section"><h3>About Us</h3>
+                <p>Bookworm's Haven is your go-to place for the best selection of books across all genres.</p></div>
+            <div class="footer-section"><h3>Quick Links</h3>
                 <ul>
                     <li><a href="#home">Home</a></li>
                     <li><a href="#books">Books</a></li>
@@ -342,15 +333,11 @@
                     <li><a href="#contact">Contact</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h3>Contact Us</h3>
+            <div class="footer-section"><h3>Contact Us</h3>
                 <p>Email: info@bookwormshaven.com</p>
-                <p>Phone: (123) 456-7890</p>
-            </div>
+                <p>Phone: (123) 456-7890</p></div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Bookworm's Haven. All rights reserved.</p>
-        </div>
+        <div class="footer-bottom"><p>&copy; 2023 Bookworm's Haven. All rights reserved.</p></div>
     </div>
 </footer>
 </body>

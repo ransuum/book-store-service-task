@@ -1,6 +1,7 @@
 package com.epam.rd.autocode.spring.project.controller.thymeleaf;
 
 import com.epam.rd.autocode.spring.project.dto.BookDTO;
+import com.epam.rd.autocode.spring.project.dto.ClientDTO;
 import com.epam.rd.autocode.spring.project.dto.EmployeeDTO;
 import com.epam.rd.autocode.spring.project.service.BookService;
 import com.epam.rd.autocode.spring.project.service.ClientService;
@@ -34,12 +35,14 @@ public class HomePageController {
     @GetMapping("/home")
     public String viewBooksPage(
             @RequestParam(defaultValue = "0", required = false) Integer page,
-            @RequestParam(defaultValue = "20", required = false) Integer size,
+            @RequestParam(defaultValue = "6", required = false) Integer size,
             Model model,
             @CookieValue(value = "Authorization", required = false) String authCookie
     ) {
         Page<BookDTO> books = bookService.getAllBooks(PageRequest.of(page, size));
         model.addAttribute("books", books);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", books.getTotalPages());
         model.addAttribute("authenticated", authCookie != null);
         return "home-page";
     }
@@ -70,7 +73,9 @@ public class HomePageController {
             log.info("Employee: {}", employeeDTO);
             return "employee-profile";
         } else {
-            model.addAttribute("client", clientService.getClientByEmail(authentication.getName()));
+            ClientDTO clientDTO = clientService.getClientByEmail(authentication.getName());
+            model.addAttribute("client", clientDTO);
+            log.info("Client: {}", clientDTO);
             return "client-profile";
         }
     }

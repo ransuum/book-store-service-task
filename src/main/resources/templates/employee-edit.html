@@ -55,15 +55,15 @@
 <body>
 <div class="container">
     <h1>Edit Employee Profile</h1>
-    <form th:action="@{/employee/edit}" method="post" id="employeeProfileForm" th:object="${employee}">
+    <form th:action="@{/employee/edit}" method="post" th:object="${employee}">
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" th:field="*{password}">
 
         <label for="name">Name:</label>
         <input type="text" id="name" name="name" th:field="*{name}">
 
-        <label for="birthDate">Birth Date:</label>
-        <input type="date" id="birthDate" name="birthDate" th:field="*{birthdate}">
+        <label for="birthdate">Birth Date:</label>
+        <input type="date" id="birthdate" name="birthdate" th:field="*{birthdate}">
 
         <label for="phone">Phone:</label>
         <input type="tel" id="phone" name="phone" th:field="*{phone}">

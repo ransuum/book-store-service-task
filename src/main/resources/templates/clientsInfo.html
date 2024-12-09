@@ -57,6 +57,31 @@
             color: #34495e;
         }
 
+        .pagination {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .pagination a {
+            margin: 0 5px;
+            padding: 10px 15px;
+            border: 1px solid #ccc;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .pagination a:hover {
+            background-color: #f4f4f4;
+        }
+
+        .pagination .current {
+            font-weight: bold;
+            background-color: #333;
+            color: #fff;
+        }
+
         @media (max-width: 768px) {
             .client-card {
                 width: calc(50% - 20px);
@@ -73,17 +98,25 @@
 <body>
 <div class="container">
     <h1>Information about clients</h1>
-    <div th:each="client : ${client}" class="client-list">
-        <div  class="client-card">
+    <div th:each="client : ${clients}" class="client-list">
+        <div class="client-card">
             <h2 th:text="'Name: ' + ${client.name}">Ivan Ivanov</h2>
             <p th:text="'Email: ' + ${client.email}"> ivan@example.com</p>
-            <p th:text="'Balance: ' + ${client.balance}"><strong>Balance:</strong> 342342342</p>
+            <p th:text="'Balance: ' + ${client.balance}">Balance: 342342342</p>
             <form th:action="@{/list/delete-client/{name}(name=${client.email})}" th:method="post">
                 <button type="submit" class="delete-button">Delete Client</button>
             </form>
         </div>
     </div>
+
+    <div class="pagination">
+        <a th:if="${currentPage > 0}" th:href="@{/list/clients(page=${currentPage - 1}, size=${size})}">Previous</a>
+        <span th:each="i : ${#numbers.sequence(0, totalPages - 1)}">
+            <a th:href="@{/list/clients(page=${i}, size=${size})}" th:classappend="${i == currentPage} ? 'current' : ''"
+               th:text="${i + 1}">1</a>
+        </span>
+        <a th:if="${currentPage < totalPages - 1}" th:href="@{/list/clients(page=${currentPage + 1}, size=${size})}">Next</a>
+    </div>
 </div>
 </body>
 </html>
-

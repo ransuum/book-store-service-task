@@ -20,9 +20,12 @@ public class ClientsController {
     @GetMapping("/clients")
     public String getPage(Model model,
                           @RequestParam(defaultValue = "0", required = false) Integer page,
-                          @RequestParam(defaultValue = "20", required = false) Integer size) {
-        Page<ClientDTO> clientDTOS = clientService.getAllClients(PageRequest.of(page, size));
-        model.addAttribute("client", clientDTOS);
+                          @RequestParam(defaultValue = "6", required = false) Integer size) {
+        Page<ClientDTO> clients = clientService.getAllClients(PageRequest.of(page, size));
+        model.addAttribute("clients", clients);
+        model.addAttribute("currentPage", page);
+        model.addAttribute("totalPages", clients.getTotalPages());
+        model.addAttribute("size", size);
         return "clientsInfo";
     }
 
