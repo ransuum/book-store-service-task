@@ -25,17 +25,16 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
     private final ClientRepository clientRepository;
     private final EmployeeRepository employeeRepository;
+    final SecurityFilter securityFilter;
 
     @Value("${spring.profiles.active}")
     private String profile;
 
-    public SecurityConfig(ClientRepository clientRepository, EmployeeRepository employeeRepository) {
+    public SecurityConfig(ClientRepository clientRepository, EmployeeRepository employeeRepository, SecurityFilter securityFilter) {
         this.clientRepository = clientRepository;
         this.employeeRepository = employeeRepository;
+        this.securityFilter = securityFilter;
     }
-
-    @Autowired
-    SecurityFilter securityFilter;
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity) throws Exception {
