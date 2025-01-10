@@ -28,9 +28,4 @@ public class ClientRegister implements RegisterManager<ClientReq, ClientDTO>{
                 user.getName(), user.getBalance()));
         return modelMapper.map(client, ClientDTO.class);
     }
-
-    @Override
-    public AuthoritiesType getAuthoritiesType() {
-        return AuthoritiesType.CLIENT;
-    }
 }

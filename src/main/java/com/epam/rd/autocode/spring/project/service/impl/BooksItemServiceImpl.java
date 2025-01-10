@@ -7,7 +7,9 @@ import com.epam.rd.autocode.spring.project.service.BooksItemService;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.stereotype.Service;
 
+@Service
 public class BooksItemServiceImpl implements BooksItemService {
     private final BooksItemRepo booksItemRepo;
     private final ModelMapper modelMapper;
@@ -26,15 +28,13 @@ public class BooksItemServiceImpl implements BooksItemService {
     @Override
     public BookItemDTO getBookItemById(Long id) {
         return modelMapper.map(booksItemRepo.findById(id)
-                .orElseThrow(()
-                        -> new NotFoundException("Book item not found")), BookItemDTO.class);
+                .orElseThrow(() -> new NotFoundException("Book item not found")), BookItemDTO.class);
     }
 
     @Override
     public void deleteBookItemById(Long id) {
         booksItemRepo.delete(booksItemRepo.findById(id)
-                .orElseThrow(()
-                        -> new NotFoundException("Book item not found")));
+                .orElseThrow(() -> new NotFoundException("Book item not found")));
     }
 
     @Override

@@ -4,5 +4,4 @@ import com.epam.rd.autocode.spring.project.model.enums.AuthoritiesType;
 
 public interface RegisterManager<T, D> {
     D register(T user);
-    AuthoritiesType getAuthoritiesType();
 }

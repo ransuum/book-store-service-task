@@ -30,9 +30,4 @@ public class EmployeeRegister implements RegisterManager<EmployeeReq, EmployeeDT
         );
         return modelMapper.map(employee, EmployeeDTO.class);
     }
-
-    @Override
-    public AuthoritiesType getAuthoritiesType() {
-        return AuthoritiesType.EMPLOYEE;
-    }
 }
