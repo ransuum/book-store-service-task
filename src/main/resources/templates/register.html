@@ -4,124 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
-    <style>
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            min-height: 100vh;
-            margin: 0;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-
-        .container {
-            background-color: rgba(255, 255, 255, 0.9);
-            padding: 2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
-            width: 100%;
-            max-width: 400px;
-        }
-
-        h2 {
-            color: #4a5568;
-            text-align: center;
-            margin-bottom: 1.5rem;
-        }
-
-        form {
-            display: flex;
-            flex-direction: column;
-        }
-
-        input, select {
-            margin-bottom: 1rem;
-            padding: 0.75rem;
-            border: 1px solid #e2e8f0;
-            border-radius: 5px;
-            font-size: 1rem;
-            transition: border-color 0.3s ease;
-        }
-
-        input:focus, select:focus {
-            outline: none;
-            border-color: #667eea;
-        }
-
-        button {
-            background-color: #667eea;
-            color: white;
-            padding: 0.75rem;
-            border: none;
-            border-radius: 5px;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-
-        button:hover {
-            background-color: #5a67d8;
-        }
-
-        .login-link {
-            text-align: center;
-            margin-top: 1rem;
-            color: #4a5568;
-        }
-
-        .login-link a {
-            color: #667eea;
-            text-decoration: none;
-        }
-
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-
-        .home-button {
-            display: block;
-            width: 100%;
-            text-align: center;
-            margin-top: 1rem;
-            padding: 0.75rem;
-            background-color: #4a5568;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            transition: background-color 0.3s ease;
-        }
-
-        .home-button:hover {
-            background-color: #2d3748;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/register-style.css}"/>
 </head>
 <body>
 <div class="container">
     <h2>Create an Account</h2>
-    <select id="userType" name="userType" onchange="toggleForms()">
-        <option value="">Select user type</option>
+    <label for="userType"></label><select id="userType" name="userType" onchange="toggleForms()">
+        <option value="select">Select user type</option>
         <option value="employee">Employee</option>
         <option value="client">Client</option>
     </select>
 
     <form id="employeeForm" th:action="@{/thyme/register/employee}" method="post" th:object="${employeeReq}" style="display:none;">
-        <input type="text" th:field="*{name}" placeholder="Name" required>
-        <input type="email" th:field="*{email}" placeholder="Email" required>
-        <input type="password" th:field="*{password}" placeholder="Password" required>
-        <input type="date" th:field="*{birthdate}" placeholder="Birth Date" required>
-        <input type="tel" th:field="*{phone}" placeholder="Phone" required>
+        <label for="employeeName"></label><input type="text" id="employeeName" th:field="*{name}" placeholder="Name" required>
+        <label for="employeeEmail"></label><input type="email" id="employeeEmail" th:field="*{email}" placeholder="Email" required>
+        <label for="employeePassword"></label><input type="password" id="employeePassword" th:field="*{password}" placeholder="Password" required>
+        <label for="employeeBirthdate"></label><input type="date" id="employeeBirthdate" th:field="*{birthdate}" placeholder="Birth Date" required>
+        <label for="employeePhone"></label><input type="tel" id="employeePhone" th:field="*{phone}" placeholder="Phone" required>
         <button type="submit">Register Employee</button>
     </form>
 
     <form id="clientForm" th:action="@{/thyme/register/client}" method="post" th:object="${clientReq}" style="display:none;">
-        <input type="text" th:field="*{name}" placeholder="Name" required>
-        <input type="email" th:field="*{email}" placeholder="Email" required>
-        <input type="password" th:field="*{password}" placeholder="Password" required>
-        <input type="number" th:field="*{balance}" placeholder="Balance" step="0.01" required>
+        <label for="clientName"></label><input type="text" id="clientName" th:field="*{name}" placeholder="Name" required>
+        <label for="clientEmail"></label><input type="email" id="clientEmail" th:field="*{email}" placeholder="Email" required>
+        <label for="clientPassword"></label><input type="password" id="clientPassword" th:field="*{password}" placeholder="Password" required>
+        <label for="clientBalance"></label><input type="number" id="clientBalance" th:field="*{balance}" placeholder="Balance" step="0.01" required>
         <button type="submit">Register Client</button>
     </form>
+
     <div class="login-link">
         Already have an account? <a th:href="@{/login}">Login</a>
     </div>

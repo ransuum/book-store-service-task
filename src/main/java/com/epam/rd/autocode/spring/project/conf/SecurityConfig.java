@@ -62,7 +62,7 @@ public class SecurityConfig {
                         .csrf(AbstractHttpConfigurer::disable)
                         .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                         .authorizeHttpRequests(authorize -> authorize
-                                .requestMatchers(HttpMethod.GET, "/home", "/register", "/login").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/home", "/register", "/login", "/css/*").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/sign-in", "/thyme/register/*").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/logout", "/create", "/edit/acc", "/client/*", "/client/form").hasAnyRole("EMPLOYEE", "CLIENT")
                                 .requestMatchers(HttpMethod.POST, "/deleteBook/*", "/create-book", "/employee/*").hasRole("EMPLOYEE")

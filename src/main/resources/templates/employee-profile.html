@@ -4,71 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Employee Profile</title>
-    <style>
-        body {
-            font-family: 'Arial', sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-            color: #333;
-        }
-        .container {
-            width: 80%;
-            margin: auto;
-            overflow: hidden;
-            padding: 20px;
-        }
-        header {
-            background: #3498db;
-            color: #ffffff;
-            padding-top: 30px;
-            min-height: 70px;
-            border-bottom: #2980b9 3px solid;
-        }
-        header h1 {
-            margin: 0;
-            text-align: center;
-            padding-bottom: 20px;
-        }
-        .profile-card {
-            background: #fff;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            margin-top: 20px;
-            padding: 20px;
-            border-radius: 5px;
-        }
-        .profile-card h2 {
-            color: #3498db;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        .profile-info {
-            margin-top: 20px;
-        }
-        .profile-info p {
-            margin: 10px 0;
-        }
-        .label {
-            font-weight: bold;
-            display: inline-block;
-            width: 100px;
-        }
-        footer {
-            background: #3498db;
-            color: #ffffff;
-            text-align: center;
-            padding: 10px;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-        }
-        @media(max-width: 768px) {
-            .container {
-                width: 95%;
-            }
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/employee-profile-style.css}">
 </head>
 <body>
 <header>

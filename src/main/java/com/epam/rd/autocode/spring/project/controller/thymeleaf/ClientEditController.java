@@ -23,12 +23,12 @@ public class ClientEditController {
 
     @GetMapping("/form")
     public String editClient(Model model) {
-        model.addAttribute("clientUpdate", new ClientUpdateRequest());
+        model.addAttribute("client", new ClientUpdateRequest());
         return "client-edit";
     }
 
     @PostMapping("/edit")
-    public String client(@ModelAttribute("clientUpdate") ClientUpdateRequest clientUpdateRequest) {
+    public String client(@ModelAttribute("client") ClientUpdateRequest clientUpdateRequest) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         editConfig.clientUpdate().edit(authentication.getName(), clientUpdateRequest);
         return "redirect:/client-profile";
