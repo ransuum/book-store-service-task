@@ -63,11 +63,8 @@ public class SecurityConfig {
                         .authorizeHttpRequests(authorize -> authorize
                                 .requestMatchers(HttpMethod.GET, "/home", "/register", "/login", "/css/*").permitAll()
                                 .requestMatchers(HttpMethod.POST, "/sign-in", "/thyme/register/*").permitAll()
-                                .requestMatchers(HttpMethod.POST, "/logout", "/create", "/edit/acc", "/client/*", "/client/form").hasAnyRole("EMPLOYEE", "CLIENT")
                                 .requestMatchers(HttpMethod.POST, "/deleteBook/*", "/create-book", "/employee/*").hasRole("EMPLOYEE")
-                                .requestMatchers(HttpMethod.GET, "/show/profile").authenticated()
                                 .requestMatchers(HttpMethod.GET, "/create", "/employee/profile","/list/*").hasRole("EMPLOYEE")
-                                .requestMatchers(HttpMethod.GET, "/client/*").hasAnyRole("CLIENT", "EMPLOYEE")
                                 .anyRequest().authenticated()
                         )
                         .sessionManagement(session -> session

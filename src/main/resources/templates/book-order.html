@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Showcase</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/css/book-order-style.css}">
+</head>
+<body>
+<div class="container">
+    <h1>Book Showcase</h1>
+    <div class="book-grid">
+        <div th:each="book : ${books}" class="book-card">
+            <img th:src="@{/img.png}" alt="Book Cover" class="book-image">
+            <div class="book-info" th:text="${book.name}">
+                <h2 class="book-title" th:text="${book.name}">The Great Adventure</h2>
+                <p class="book-author" th:text="${book.author}">By John Doe</p>
+                <div class="book-details">
+                    <p class="book-detail" th:text="${book.genre}"><strong>Genre:</strong> Adventure</p>
+                    <p class="book-detail" th:text="${book.language}"><strong>Language:</strong> English</p>
+                    <p class="book-detail" th:text="${book.ageGroup}"><strong>Age Group:</strong> 12-18</p>
+                    <p class="book-detail" th:text="${book.pages}"><strong>Pages:</strong> 320</p>
+                    <p class="book-detail" th:text="${book.price}"><strong>Price:</strong> $19.99</p>
+                    <p class="book-detail" th:text="${book.publicationDate}"><strong>Publication Date:</strong> May 15, 2023</p>
+                </div>
+                <p class="book-description">An exciting journey through uncharted territories, filled with mystery and wonder. Join our heroes as they uncover ancient secrets and face unexpected challenges.</p>
+                <button th:action="@{/order/book}" th:method="post" class="order-button">Order Now</button>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

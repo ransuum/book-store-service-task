@@ -15,11 +15,9 @@ import java.util.List;
 @Data
 @Builder
 public class OrderDTO{
-    @NotBlank(message = "Client email cannot be blank")
     @Email(message = "Client email should be valid")
     private String clientEmail;
 
-    @NotBlank(message = "Employee email cannot be blank")
     @Email(message = "Employee email should be valid")
     private String employeeEmail;
 

@@ -1,7 +1,6 @@
 package com.epam.rd.autocode.spring.project.service.impl;
 
 import com.epam.rd.autocode.spring.project.dto.OrderDTO;
-import com.epam.rd.autocode.spring.project.exception.NotFoundException;
 import com.epam.rd.autocode.spring.project.model.Order;
 import com.epam.rd.autocode.spring.project.repo.ClientRepository;
 import com.epam.rd.autocode.spring.project.repo.EmployeeRepository;
@@ -46,12 +45,8 @@ public class OrderServiceImpl implements OrderService {
         return modelMapper.map(orderRepository.save(Order.builder()
                 .orderDate(order.getOrderDate())
                 .price(order.getPrice())
-                .client(clientRepository.findByEmail(order.getClientEmail())
-                        .orElseThrow(()
-                                -> new NotFoundException("Not found client with email " + order.getClientEmail())))
-                .employee(employeeRepository.findByEmail(order.getEmployeeEmail())
-                        .orElseThrow(()
-                                -> new NotFoundException("Not found employee with email " + order.getEmployeeEmail())))
+                .client(clientRepository.findByEmail(order.getClientEmail()).orElse(null))
+                .employee(employeeRepository.findByEmail(order.getEmployeeEmail()).orElse(null))
                 .build()), OrderDTO.class);
     }
 }
