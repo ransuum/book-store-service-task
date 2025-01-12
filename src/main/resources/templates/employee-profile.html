@@ -23,6 +23,35 @@
             <p th:text="|Phone: *{phone}|"><span class="label">Phone:</span></p>
         </div>
     </div>
+
+    <div class="orders-card">
+        <h2>My Orders</h2>
+        <div class="orders-container" th:if="${not #lists.isEmpty(ordersEmployee.content)}">
+            <div class="order-item" th:each="order : ${ordersEmployee.content}">
+                <div class="order-header">
+                    <span class="order-date" th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}">01-01-2024</span>
+                    <span class="order-price" th:text="${'$' + order.price}">$99.99</span>
+                </div>
+                <div class="order-books">
+                    <div class="book-item" th:each="bookItem : ${order.bookItems}">
+                        <span class="book-name" th:text="${bookItem.bookName}">Book Title</span>
+                        <span class="book-quantity" th:text="${'x' + bookItem.quantity}">x1</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="no-orders" th:if="${#lists.isEmpty(ordersEmployee.content)}">
+            <p>No orders found.</p>
+        </div>
+
+        <div class="pagination" th:if="${ordersEmployee.totalPages > 1}">
+            <a th:each="pageNumber : ${#numbers.sequence(0, ordersEmployee.totalPages - 1)}"
+               th:href="@{/employee/profile(page=${pageNumber})}"
+               th:text="${pageNumber + 1}"
+               th:class="${pageNumber == ordersEmployee.number} ? 'active' : ''">
+            </a>
+        </div>
+    </div>
 </div>
 
 <footer>

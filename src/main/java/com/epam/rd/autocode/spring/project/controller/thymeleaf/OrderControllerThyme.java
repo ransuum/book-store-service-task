@@ -12,7 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-@RequestMapping("/order")
+@RequestMapping("/orders")
 @Slf4j
 public class OrderControllerThyme {
     private final OrderService orderService;
@@ -24,7 +24,7 @@ public class OrderControllerThyme {
 
     }
 
-    @GetMapping("/page")
+    @GetMapping("/get-page")
     public String order(Model model,
                         @RequestParam(defaultValue = "0", required = false) Integer page,
                         @RequestParam(defaultValue = "6", required = false) Integer size) {
@@ -36,8 +36,10 @@ public class OrderControllerThyme {
         return "book-order";
     }
 
-    @PostMapping("/book")
-    public String orderBook(@ModelAttribute("book") BookDTO bookDTO) {
+    @PostMapping("/book-order")
+    public String orderBook(@ModelAttribute("orderDto") OrderDTO orderDTO) {
+        log.info("Bookitems: {}", orderDTO.getBookItems());
+        log.info("price: {}", orderService.addOrder(orderDTO).getPrice());
         return "redirect:/home";
     }
 }

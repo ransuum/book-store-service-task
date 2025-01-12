@@ -30,11 +30,38 @@
             <p th:text="|Email: *{email}|"><span class="label">Email:</span></p>
             <p th:text="|Balance: *{balance}|"><span class="label">Balance:</span> <span class="balance"></span>$</p>
         </div>
-    </div>
-</div>
+        <div class="orders-card">
+            <h2>My Orders</h2>
+            <div class="orders-container" th:if="${not #lists.isEmpty(ordersClient.content)}">
+                <div class="order-item" th:each="order : ${ordersClient.content}">
+                    <div class="order-header">
+                        <span class="order-date" th:text="${#temporals.format(order.orderDate, 'dd-MM-yyyy HH:mm')}">01-01-2024</span>
+                        <span class="order-price" th:text="${'$' + order.price}">$99.99</span>
+                    </div>
+                    <div class="order-books">
+                        <div class="book-item" th:each="bookItem : ${order.bookItems}">
+                            <span class="book-name" th:text="${bookItem.bookName}">Book Title</span>
+                            <span class="book-quantity" th:text="${'x' + bookItem.quantity}">x1</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="no-orders" th:if="${#lists.isEmpty(ordersClient.content)}">
+                <p>You haven't placed any orders yet.</p>
+            </div>
 
-<footer>
-    <p>&copy; 2023 Company Name. All rights reserved.</p>
-</footer>
+            <div class="pagination" th:if="${ordersClient.totalPages > 1}">
+                <a th:each="pageNumber : ${#numbers.sequence(0, ordersClient.totalPages - 1)}"
+                   th:href="@{/client/profile(page=${pageNumber})}"
+                   th:text="${pageNumber + 1}"
+                   th:class="${pageNumber == ordersClient.number} ? 'active' : ''">
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2023 Company Name. All rights reserved.</p>
+    </footer>
 </body>
 </html>

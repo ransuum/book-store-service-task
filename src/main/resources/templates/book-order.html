@@ -9,25 +9,102 @@
 <body>
 <div class="container">
     <h1>Book Showcase</h1>
-    <div class="book-grid">
-        <div th:each="book : ${books}" class="book-card">
-            <img th:src="@{/img.png}" alt="Book Cover" class="book-image">
-            <div class="book-info" th:text="${book.name}">
-                <h2 class="book-title" th:text="${book.name}">The Great Adventure</h2>
-                <p class="book-author" th:text="${book.author}">By John Doe</p>
-                <div class="book-details">
-                    <p class="book-detail" th:text="${book.genre}"><strong>Genre:</strong> Adventure</p>
-                    <p class="book-detail" th:text="${book.language}"><strong>Language:</strong> English</p>
-                    <p class="book-detail" th:text="${book.ageGroup}"><strong>Age Group:</strong> 12-18</p>
-                    <p class="book-detail" th:text="${book.pages}"><strong>Pages:</strong> 320</p>
-                    <p class="book-detail" th:text="${book.price}"><strong>Price:</strong> $19.99</p>
-                    <p class="book-detail" th:text="${book.publicationDate}"><strong>Publication Date:</strong> May 15, 2023</p>
+    <form th:action="@{/orders/book-order}" method="post" th:object="${orderDto}">
+        <div class="book-grid">
+            <div th:each="book, itemStat : ${books}" class="book-card">
+                <div class="book-selection">
+                    <input type="checkbox"
+                           th:id="'bookSelect' + ${itemStat.index}"
+                           class="book-checkbox"
+                           th:data-price="${book.price}"
+                           onchange="updateBookSelection(this, ${itemStat.index})"/>
                 </div>
-                <p class="book-description">An exciting journey through uncharted territories, filled with mystery and wonder. Join our heroes as they uncover ancient secrets and face unexpected challenges.</p>
-                <button th:action="@{/order/book}" th:method="post" class="order-button">Order Now</button>
+                <div class="book-info">
+                    <h2 class="book-title" th:text="${book.name}">The Great Adventure</h2>
+                    <p class="book-author" th:text="${book.author}">By John Doe</p>
+                    <div class="book-details">
+                        <p class="book-detail"><strong>Genre:</strong> <span th:text="${book.genre}">Adventure</span></p>
+                        <p class="book-detail"><strong>Language:</strong> <span th:text="${book.language}">English</span></p>
+                        <p class="book-detail"><strong>Age Group:</strong> <span th:text="${book.ageGroup}">12-18</span></p>
+                        <p class="book-detail"><strong>Pages:</strong> <span th:text="${book.pages}">320</span></p>
+                        <p class="book-detail"><strong>Price:</strong> $<span th:text="${book.price}">19.99</span></p>
+                        <p class="book-detail"><strong>Publication Date:</strong> <span th:text="${book.publicationDate}">May 15, 2023</span></p>
+                    </div>
+                    <p class="book-description" th:text="${book.description}">An exciting journey through uncharted territories...</p>
+
+                    <div class="quantity-input" style="display: none;" th:data-index="${itemStat.index}">
+                        <label th:for="'quantity' + ${itemStat.index}">Quantity:</label>
+                        <input type="number"
+                               th:id="'quantity' + ${itemStat.index}"
+                               th:name="|bookItems[${itemStat.index}].quantity|"
+                               min="1"
+                               value="1"
+                               class="quantity-field"/>
+                        <input type="hidden"
+                               th:name="|bookItems[${itemStat.index}].bookName|"
+                               th:value="${book.name}" />
+                        <input type="hidden"
+                               th:id="'price' + ${itemStat.index}"
+                               th:value="${book.price}" />
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
+
+        <div class="order-summary">
+            <h3>Order Summary</h3>
+            <p>Total Price: $<span id="totalPrice">0.00</span></p>
+            <input type="hidden" th:field="*{price}" id="finalPrice" />
+            <button type="submit" class="order-button" id="submitOrder">Place Order</button>
+        </div>
+    </form>
 </div>
+
+<script th:inline="javascript">
+    const selectedBooks = new Set();
+    let totalPrice = 0;
+
+    function updateBookSelection(checkbox, index) {
+        const quantityInput = document.querySelector(`.quantity-input[data-index="${index}"]`);
+        const priceElement = document.getElementById(`price${index}`);
+        const quantityElement = document.getElementById(`quantity${index}`);
+
+        if (checkbox.checked) {
+            selectedBooks.add(index);
+            quantityInput.style.display = 'block';
+        } else {
+            selectedBooks.delete(index);
+            quantityInput.style.display = 'none';
+            // Reset quantity to 1 when unchecked
+            if (quantityElement) {
+                quantityElement.value = 1;
+            }
+        }
+
+        updateTotalPrice();
+        document.getElementById('submitOrder').disabled = selectedBooks.size === 0;
+    }
+
+    function updateTotalPrice() {
+        totalPrice = 0;
+        const finalBookItems = [];
+
+        selectedBooks.forEach(index => {
+            const price = parseFloat(document.getElementById(`price${index}`).value);
+            const quantity = parseInt(document.getElementById(`quantity${index}`).value);
+            if (!isNaN(price) && !isNaN(quantity)) {
+                totalPrice += price * quantity;
+            }
+        });
+
+        document.getElementById('totalPrice').textContent = totalPrice.toFixed(2);
+        document.getElementById('finalPrice').value = totalPrice.toFixed(2);
+    }
+
+    document.querySelectorAll('.quantity-field').forEach(input => {
+        input.addEventListener('change', updateTotalPrice);
+        input.addEventListener('input', updateTotalPrice);
+    });
+</script>
 </body>
 </html>

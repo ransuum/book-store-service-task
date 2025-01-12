@@ -19,7 +19,7 @@
             <li th:if="${!authenticated}"><a th:href="@{/register}" th:method="post">Sign Up</a></li>
             <li th:if="${authenticated}"><a th:href="@{/sign-out/acc}" th:method="get">Logout</a></li>
             <li th:if="${authenticated}"><a th:href="@{/show/profile}" th:method="get">Profile</a></li>
-            <li th:if="${authenticated}"><a th:href="@{/oder/page}" th:method="get">Order</a></li>
+            <li th:if="${authenticated}"><a th:href="@{/orders/get-page}" th:method="get">Order</a></li>
         </ul>
     </nav>
 </header>

@@ -30,9 +30,10 @@ public class Order {
     @JoinColumn(name = "employee_id", referencedColumnName = "id")
     private Employee employee;
 
+    @Column(name = "order_date", nullable = false)
     private LocalDateTime orderDate;
 
-    @Column(name = "BALANCE", nullable = false)
+    @Column(name = "price")
     private BigDecimal price;
 
     @OneToMany(mappedBy = "order", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
