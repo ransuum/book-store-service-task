@@ -49,7 +49,6 @@ public class SecurityConfig {
                                 .requestMatchers(HttpMethod.POST, "/employees/**").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.DELETE, "/employees/*").hasRole("EMPLOYEE")
                                 .requestMatchers(HttpMethod.POST, "/clients/**").hasRole("EMPLOYEE")
-                                .requestMatchers(HttpMethod.PUT, "/clients/**").hasAnyRole("EMPLOYEE", "CLIENTS")
                                 .anyRequest().authenticated())
                         .sessionManagement(session -> session
                                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS)

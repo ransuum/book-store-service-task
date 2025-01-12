@@ -25,9 +25,8 @@ public class AuthenticationConfiguration implements AuthenticationProvider {
 
         User user = (User) userDetailsService.loadUserByUsername(authentication.getName());
 
-        if (!passwordEncoder.matches(password, user.getPassword())) {
+        if (!passwordEncoder.matches(password, user.getPassword()))
             throw new BadCredentialsException("Invalid credentials");
-        }
 
         return new UsernamePasswordAuthenticationToken(
                 user,

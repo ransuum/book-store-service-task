@@ -51,9 +51,7 @@ public class SecurityFilter extends OncePerRequestFilter {
             Optional<Cookie> authCookie = Arrays.stream(cookies)
                     .filter(cookie -> cookie.getName().equals("Authorization"))
                     .findFirst();
-            if (authCookie.isPresent()) {
-                return authCookie.get().getValue();
-            }
+            if (authCookie.isPresent()) return authCookie.get().getValue();
         }
         return null;
     }
