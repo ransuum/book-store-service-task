@@ -18,7 +18,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public Map<String, Object> login(LoginRequest loginReq, AuthenticationManager authenticationManager) {
-        var usernamePassword = new UsernamePasswordAuthenticationToken(loginReq.getEmail(), loginReq.getPassword());
+        final var usernamePassword = new UsernamePasswordAuthenticationToken(loginReq.getEmail(), loginReq.getPassword());
         Authentication authenticated = authenticationManager.authenticate(usernamePassword);
         return Map.of(
                 "role", authenticated.getAuthorities().stream()
@@ -30,7 +30,7 @@ public class AuthServiceImpl implements AuthService {
 
     @Override
     public void logout(HttpServletResponse response) {
-        Cookie jwtCookie = new Cookie("Authorization", null);
+        var jwtCookie = new Cookie("Authorization", null);
         jwtCookie.setHttpOnly(true);
         jwtCookie.setSecure(true);
         jwtCookie.setMaxAge(0);

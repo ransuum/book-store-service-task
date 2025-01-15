@@ -40,7 +40,7 @@ public class BookServiceImpl implements BookService {
 
     @Override
     public BookDTO updateBookByName(String name, BookDTO book) {
-        Book book1 = bookRepository.findByName(name)
+        var book1 = bookRepository.findByName(name)
                 .orElseThrow(()
                         -> new NotFoundException("Book with this name: " + name + " not found"));
         return modelMapper.map(bookRepository.save(validator.validate(book1, book)), BookDTO.class);
