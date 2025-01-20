@@ -14,7 +14,7 @@ body {
 }
 header {
     background: #2ecc71;
-    color: #ffffff;
+    color: red;
     padding-top: 30px;
     min-height: 70px;
     border-bottom: #27ae60 3px solid;

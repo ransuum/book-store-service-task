@@ -23,7 +23,7 @@ public class AuthenticationConfiguration implements AuthenticationProvider {
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         String password = authentication.getCredentials().toString();
 
-        User user = (User) userDetailsService.loadUserByUsername(authentication.getName());
+        var user = (User) userDetailsService.loadUserByUsername(authentication.getName());
 
         if (!passwordEncoder.matches(password, user.getPassword()))
             throw new BadCredentialsException("Invalid credentials");

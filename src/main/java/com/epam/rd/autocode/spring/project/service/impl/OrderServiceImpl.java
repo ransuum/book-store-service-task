@@ -5,11 +5,9 @@ import com.epam.rd.autocode.spring.project.exception.NotFoundException;
 import com.epam.rd.autocode.spring.project.model.Book;
 import com.epam.rd.autocode.spring.project.model.BookItem;
 import com.epam.rd.autocode.spring.project.model.Order;
-import com.epam.rd.autocode.spring.project.repo.BookRepository;
-import com.epam.rd.autocode.spring.project.repo.ClientRepository;
-import com.epam.rd.autocode.spring.project.repo.EmployeeRepository;
-import com.epam.rd.autocode.spring.project.repo.OrderRepository;
+import com.epam.rd.autocode.spring.project.repo.*;
 import com.epam.rd.autocode.spring.project.service.OrderService;
+import lombok.extern.log4j.Log4j2;
 import org.modelmapper.ModelMapper;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -23,22 +21,24 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
+@Log4j2
 public class OrderServiceImpl implements OrderService {
-
     private final ModelMapper modelMapper;
     private final OrderRepository orderRepository;
     private final ClientRepository clientRepository;
     private final EmployeeRepository employeeRepository;
     private final BookRepository bookRepository;
+    private final BooksItemRepo booksItemRepo;
 
     public OrderServiceImpl(ModelMapper modelMapper, OrderRepository orderRepository,
                             ClientRepository clientRepository,
-                            EmployeeRepository employeeRepository, BookRepository bookRepository) {
+                            EmployeeRepository employeeRepository, BookRepository bookRepository, BooksItemRepo booksItemRepo) {
         this.modelMapper = modelMapper;
         this.orderRepository = orderRepository;
         this.clientRepository = clientRepository;
         this.employeeRepository = employeeRepository;
         this.bookRepository = bookRepository;
+        this.booksItemRepo = booksItemRepo;
     }
 
     @Override
@@ -69,6 +69,7 @@ public class OrderServiceImpl implements OrderService {
                 .map(bookItemDTO -> {
                     Book book = bookRepository.findByName(bookItemDTO.getBookName())
                             .orElseThrow(() -> new NotFoundException("Book not found: " + bookItemDTO.getBookName()));
+                    log.info("Quantity: {}", bookItemDTO.getQuantity());
                     return BookItem.builder()
                             .book(book)
                             .quantity(bookItemDTO.getQuantity())
@@ -79,11 +80,18 @@ public class OrderServiceImpl implements OrderService {
         Order savedOrder = orderRepository.save(Order.builder()
                 .orderDate(LocalDateTime.now())
                 .price(totalPrice)
-                        .employee(employeeRepository.findByEmail(authentication.getName()).orElse(null))
+                .employee(employeeRepository.findByEmail(authentication.getName()).orElse(null))
                 .client(clientRepository.findByEmail(authentication.getName())
                         .orElse(null))
                 .bookItems(bookItems)
                 .build());
+
+        bookItems.forEach(bookItem -> {
+            bookItem.setOrder(savedOrder);
+            booksItemRepo.save(bookItem);
+        });
+
+        log.info("Saved: {}", booksItemRepo.findAll());
 
         savedOrder.getBookItems().forEach(item -> item.setOrder(savedOrder));
 

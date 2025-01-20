@@ -73,3 +73,13 @@ h1 {
 .order-button:hover {
     background-color: #2980b9;
 }
+
+.order-button:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.order-button.disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

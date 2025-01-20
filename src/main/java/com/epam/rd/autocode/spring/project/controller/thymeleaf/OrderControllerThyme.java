@@ -27,7 +27,7 @@ public class OrderControllerThyme {
     @GetMapping("/get-page")
     public String order(Model model,
                         @RequestParam(defaultValue = "0", required = false) Integer page,
-                        @RequestParam(defaultValue = "6", required = false) Integer size) {
+                        @RequestParam(defaultValue = "35", required = false) Integer size) {
         model.addAttribute("orderDto", new OrderDTO());
         Page<BookDTO> books = bookService.getAllBooks(PageRequest.of(page, size));
         model.addAttribute("books", books);

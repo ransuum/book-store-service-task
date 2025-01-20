@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @AllArgsConstructor
@@ -29,5 +30,5 @@ public class OrderDTO{
     @DecimalMin(value = "0.0", inclusive = false, message = "Price must be greater than zero")
     private BigDecimal price;
 
-    private List<BookItemDTO> bookItems;
+    private List<BookItemDTO> bookItems = new ArrayList<>();
 }
