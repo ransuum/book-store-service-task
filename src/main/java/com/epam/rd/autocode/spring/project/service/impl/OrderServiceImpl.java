@@ -1,5 +1,6 @@
 package com.epam.rd.autocode.spring.project.service.impl;
 
+import com.epam.rd.autocode.spring.project.dto.BookItemDTO;
 import com.epam.rd.autocode.spring.project.dto.OrderDTO;
 import com.epam.rd.autocode.spring.project.exception.NotFoundException;
 import com.epam.rd.autocode.spring.project.model.Book;
@@ -57,7 +58,13 @@ public class OrderServiceImpl implements OrderService {
     public OrderDTO addOrder(OrderDTO order) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
-        BigDecimal totalPrice = order.getBookItems().stream()
+        List<BookItemDTO> validBookItems = order.getBookItems().stream()
+                .filter(item -> item != null && item.getBookName() != null && item.getQuantity() > 0)
+                .collect(Collectors.toList());
+
+        order.setBookItems(validBookItems);
+
+        BigDecimal totalPrice = validBookItems.stream()
                 .map(item -> {
                     Book book = bookRepository.findByName(item.getBookName())
                             .orElseThrow(() -> new NotFoundException("Book not found: " + item.getBookName()));
@@ -65,7 +72,7 @@ public class OrderServiceImpl implements OrderService {
                 })
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
-        List<BookItem> bookItems = order.getBookItems().stream()
+        List<BookItem> bookItems = validBookItems.stream()
                 .map(bookItemDTO -> {
                     Book book = bookRepository.findByName(bookItemDTO.getBookName())
                             .orElseThrow(() -> new NotFoundException("Book not found: " + bookItemDTO.getBookName()));
@@ -92,8 +99,6 @@ public class OrderServiceImpl implements OrderService {
         });
 
         log.info("Saved: {}", booksItemRepo.findAll());
-
-        savedOrder.getBookItems().forEach(item -> item.setOrder(savedOrder));
 
         return modelMapper.map(savedOrder, OrderDTO.class);
     }
