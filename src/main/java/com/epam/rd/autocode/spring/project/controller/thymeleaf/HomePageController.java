@@ -4,10 +4,12 @@ import com.epam.rd.autocode.spring.project.dto.BookDTO;
 import com.epam.rd.autocode.spring.project.dto.ClientDTO;
 import com.epam.rd.autocode.spring.project.dto.EmployeeDTO;
 import com.epam.rd.autocode.spring.project.dto.OrderDTO;
+import com.epam.rd.autocode.spring.project.model.enums.AuthoritiesType;
 import com.epam.rd.autocode.spring.project.service.BookService;
 import com.epam.rd.autocode.spring.project.service.ClientService;
 import com.epam.rd.autocode.spring.project.service.EmployeeService;
 import com.epam.rd.autocode.spring.project.service.OrderService;
+import com.epam.rd.autocode.spring.project.util.profile_chooser.Profile;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -19,21 +21,18 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 @Controller
 @Slf4j
 public class HomePageController {
     private final BookService bookService;
-    private final ClientService clientService;
-    private final EmployeeService employeeService;
-    private final OrderService orderService;
+    private final Map<Boolean, Profile> profile;
 
-    public HomePageController(BookService bookService, ClientService clientService, EmployeeService employeeService, OrderService orderService) {
+    public HomePageController(BookService bookService, List<Profile> profiles) {
         this.bookService = bookService;
-        this.clientService = clientService;
-        this.employeeService = employeeService;
-        this.orderService = orderService;
+        this.profile = profiles.stream().collect(Collectors.toMap(Profile::getName, profile -> profile));
     }
 
     @GetMapping("/home")
@@ -71,25 +70,7 @@ public class HomePageController {
         List<String> roles = authentication.getAuthorities().stream()
                 .map(GrantedAuthority::getAuthority)
                 .toList();
-
-        if (roles.contains("ROLE_EMPLOYEE")) {
-            EmployeeDTO employeeDTO = employeeService.getEmployeeByEmail(authentication.getName());
-            model.addAttribute("employee", employeeDTO);
-            Page<OrderDTO> ordersByEmployee = orderService.getOrdersByEmployee(
-                    employeeDTO.getEmail(),
-                    PageRequest.of(page, size)
-            );
-            model.addAttribute("ordersEmployee", ordersByEmployee);
-            return "employee-profile";
-        } else {
-            ClientDTO clientDTO = clientService.getClientByEmail(authentication.getName());
-            model.addAttribute("client", clientDTO);
-            Page<OrderDTO> ordersByClient = orderService.getOrdersByClient(
-                    clientDTO.getEmail(),
-                    PageRequest.of(page, size)
-            );
-            model.addAttribute("ordersClient", ordersByClient);
-            return "client-profile";
-        }
+        return profile.get(roles.contains(AuthoritiesType.EMPLOYEE.getValue()))
+                .showProfile(authentication.getName(), roles, model);
     }
 }

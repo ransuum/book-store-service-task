@@ -1,6 +1,5 @@
 package com.epam.rd.autocode.spring.project.controller.thymeleaf;
 
-import com.epam.rd.autocode.spring.project.model.Employee;
 import com.epam.rd.autocode.spring.project.model.request.edit.EmployeeUpdateRequest;
 import com.epam.rd.autocode.spring.project.util.edit_manager.config.EditConfig;
 import org.springframework.security.core.Authentication;
